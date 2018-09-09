@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+
+namespace Interpreted_Language.Language.Lexer.Grammar.Traits
+{
+    internal interface IGrammar
+    {
+        /// <summary>
+        /// The name of the grammar.
+        /// </summary>
+        string Name { get; }
+        /// <summary>
+        /// The grammar rules.
+        /// </summary>
+        IEnumerable<LexicalRule> Rules { get; }
+    }
+}
