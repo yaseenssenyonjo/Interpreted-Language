@@ -1,0 +1,37 @@
+using System.Text.RegularExpressions;
+using Interpreted_Language.Language.Lexer.Tokens;
+
+namespace Interpreted_Language.Language.Lexer
+{
+    /// <summary>
+    /// Represents a lexical rule.
+    /// </summary>
+    internal class LexicalRule
+    {
+        /// <summary>
+        /// The type of token associated with this rule.
+        /// </summary>
+        public readonly TokenType TokenType;
+        /// <summary>
+        /// The regular expression.
+        /// </summary>
+        public readonly Regex RegularExpression;
+        /// <summary>
+        /// Determines if this token type is returned when found.
+        /// </summary>
+        public readonly bool IsIgnored;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interpreted_Language.Language.Lexer.LexicalRule"/> class.
+        /// </summary>
+        /// <param name="type">The token type to associate with.</param>
+        /// <param name="pattern">The pattern to associate the token with.</param>
+        /// <param name="isIgnored">Is this token type returned when found.</param>
+        public LexicalRule(TokenType type, string pattern, bool isIgnored = false)
+        {
+            TokenType = type;
+            RegularExpression = new Regex(pattern, RegexOptions.Compiled);
+            IsIgnored = isIgnored;
+        }
+    }
+}
