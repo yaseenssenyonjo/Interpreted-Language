@@ -7,11 +7,12 @@ namespace Interpreted_Language.Language.Lexer.Tokens
     {
         Equal,
         String,
-        Comment,
         Keyword,
         Identifier,
         Tab,
         Punctuation,
-        Integer
+        Integer,
+        NewLine,
+        None
     }
 }

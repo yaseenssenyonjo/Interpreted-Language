@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Interpreted_Language.Language.Lexer.Tokens;
 using Interpreted_Language.Language.Lexer.Exceptions;
@@ -32,7 +31,7 @@ namespace Interpreted_Language.Language.Lexer
         /// <param name="input">The string to tokenise. If input is null, an exception is thrown.</param>
         /// <returns>The tokens.</returns>
         /// <exception cref="ArgumentNullException">The input is null.</exception>
-        public IEnumerable<Token> Tokenise(string input)
+        public TokenList Tokenise(string input)
         {
             if (string.IsNullOrEmpty(input)) throw new ArgumentNullException(nameof(input));
             
@@ -58,9 +57,9 @@ namespace Interpreted_Language.Language.Lexer
         /// <returns>The tokens.</returns>
         /// <exception cref="ArgumentNullException">The line is null.</exception>
         /// <exception cref="CaptureGroupException">There is no capture group in a rule.</exception>
-        private IEnumerable<Token> Tokenise(Stream inputStream)
+        private TokenList Tokenise(Stream inputStream)
         {
-            var tokens = new List<Token>();
+            var tokens = new TokenList();
 
             using (var streamReader = new StreamReader(inputStream))
             {
@@ -95,20 +94,19 @@ namespace Interpreted_Language.Language.Lexer
                         }
                         
                         // TODO: Rider uses spaces when indenting the "script.rpy" file which has highlighted the inability for 4 spaces to be handled as tabs which needs to be resolved.
-
-                        if (lexicalRule == null)
-                        {
-                            // TODO: This means that it failed to find a rule for the remaining line, so throw an exception stating that it failed to find a rule.
-                            throw new NotImplementedException();
-                        }
+                        
+                        // This means that it failed to find a rule for the remaining line, so throw an exception.
+                        if (lexicalRule == null) throw new LexerException($"{_grammar.Name}: Failed to find a lexical rule that matches line {lineNumber}.");
                         // If the token isn't ignored, add it to the list.
-                        if (!lexicalRule.IsIgnored) tokens.Add(new Token(lexicalRule.TokenType, matchValue));
+                        if (!lexicalRule.IsIgnored) tokens.Add(new Token(lexicalRule.TokenType, matchValue, lineNumber));
                         
                         var whitespace = WhitespaceRegex.Match(line, startIndex + matchLength);
                         if (whitespace.Success && whitespace.Length > 0) matchLength += whitespace.Length;
 
                         startIndex += matchLength;
                     }
+                    
+                    tokens.Add(new Token(TokenType.NewLine, string.Empty, lineNumber));
                 }
             }
             
