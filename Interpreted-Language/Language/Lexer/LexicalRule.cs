@@ -26,12 +26,20 @@ namespace Interpreted_Language.Language.Lexer
         /// </summary>
         /// <param name="type">The token type to associate with.</param>
         /// <param name="pattern">The pattern to associate the token with.</param>
-        /// <param name="isIgnored">Is this token type returned when found.</param>
-        public LexicalRule(TokenType type, string pattern, bool isIgnored = false)
+        public LexicalRule(TokenType type, string pattern)
         {
             TokenType = type;
             RegularExpression = new Regex(pattern, RegexOptions.Compiled);
-            IsIgnored = isIgnored;
+        }
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Interpreted_Language.Language.Lexer.LexicalRule"/> class.
+        /// </summary>
+        /// <param name="pattern">The pattern to associate the token with.</param>
+        /// <remarks>Without a defined token type, the token is ignored.</remarks>
+        public LexicalRule(string pattern) : this(TokenType.None, pattern)
+        {
+            IsIgnored = true;
         }
     }
 }

@@ -40,12 +40,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Language\Lexer\Exceptions\CaptureGroupException.cs" />
+    <Compile Include="Language\Lexer\Exceptions\LexerException.cs" />
     <Compile Include="Language\Lexer\Grammar\RenPyGrammar.cs" />
     <Compile Include="Language\Lexer\Grammar\Traits\IGrammar.cs" />
     <Compile Include="Language\Lexer\Lexer.cs" />
     <Compile Include="Language\Lexer\LexicalRule.cs" />
     <Compile Include="Language\Lexer\Tokens\Token.cs" />
+    <Compile Include="Language\Lexer\Tokens\TokenList.cs" />
     <Compile Include="Language\Lexer\Tokens\TokenType.cs" />
+    <Compile Include="Language\Parser\Exceptions\ParserException.cs" />
+    <Compile Include="Language\Parser\Groups\Group.cs" />
+    <Compile Include="Language\Parser\Groups\Statements\Capture.cs" />
+    <Compile Include="Language\Parser\Groups\Statements\ConsumeUntil.cs" />
+    <Compile Include="Language\Parser\Groups\Statements\ExpectAndIgnore.cs" />
+    <Compile Include="Language\Parser\Groups\Statements\Traits\IStatement.cs" />
+    <Compile Include="Language\Parser\Parser.cs" />
+    <Compile Include="Language\Parser\SyntaxTree\Nodes\AssignmentNode.cs" />
+    <Compile Include="Language\Parser\SyntaxTree\Nodes\SayNode.cs" />
+    <Compile Include="Language\Parser\SyntaxTree\Nodes\Traits\Node.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
