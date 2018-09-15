@@ -5,6 +5,9 @@ using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
 
 namespace Interpreted_Language.Language.Parser.Groups.Statements
 {
+    /// <summary>
+    /// Consumes until a specific token is found.
+    /// </summary>
     internal class ConsumeUntil : IStatement
     {
         /// <summary>

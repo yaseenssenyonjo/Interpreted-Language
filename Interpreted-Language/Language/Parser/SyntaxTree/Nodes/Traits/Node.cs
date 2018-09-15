@@ -1,6 +1,9 @@
 namespace Interpreted_Language.Language.Parser.SyntaxTree.Nodes.Traits
 {
-    internal abstract class Node
+    /// <summary>
+    /// Represents a node.
+    /// </summary>
+    internal interface INode
     {
     }
 }
