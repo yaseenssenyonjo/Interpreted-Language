@@ -51,6 +51,7 @@
     <Compile Include="Language\Parser\Exceptions\ParserException.cs" />
     <Compile Include="Language\Parser\Groups\Group.cs" />
     <Compile Include="Language\Parser\Groups\Statements\Capture.cs" />
+    <Compile Include="Language\Parser\Groups\Statements\ConditionalLoop.cs" />
     <Compile Include="Language\Parser\Groups\Statements\ConsumeUntil.cs" />
     <Compile Include="Language\Parser\Groups\Statements\ExpectAndIgnore.cs" />
     <Compile Include="Language\Parser\Groups\Statements\Traits\IStatement.cs" />

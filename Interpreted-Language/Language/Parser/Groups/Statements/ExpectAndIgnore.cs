@@ -3,6 +3,9 @@ using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
 
 namespace Interpreted_Language.Language.Parser.Groups.Statements
 {
+    /// <summary>
+    /// Expects and ignores a specific token.
+    /// </summary>
     internal class ExpectAndIgnore : IStatement
     {
         /// <summary>

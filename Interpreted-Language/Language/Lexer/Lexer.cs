@@ -11,9 +11,12 @@ namespace Interpreted_Language.Language.Lexer
     internal class Lexer
     {
         /// <summary>
-        /// The grammar.
+        /// The grammar rules.
         /// </summary>
         private readonly IGrammar _grammar;
+        /// <summary>
+        /// 
+        /// </summary>
         private static readonly Regex WhitespaceRegex = new Regex($@"((\r|\t|\v|\f| )*(?<NewLine>({Environment.NewLine}|\n)+)?)+", RegexOptions.Compiled);
         
         /// <summary>
@@ -92,8 +95,6 @@ namespace Interpreted_Language.Language.Lexer
                             matchLength = match.Length;
                             break;
                         }
-                        
-                        // TODO: Rider uses spaces when indenting the "script.rpy" file which has highlighted the inability for 4 spaces to be handled as tabs which needs to be resolved.
                         
                         // This means that it failed to find a rule for the remaining line, so throw an exception.
                         if (lexicalRule == null) throw new LexerException($"{_grammar.Name}: Failed to find a lexical rule that matches line {lineNumber}.");

@@ -5,8 +5,14 @@ using Interpreted_Language.Language.Parser.Groups;
 
 namespace Interpreted_Language.Language.Parser
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class Parser
     {
+        /// <summary>
+        /// The filter groups.
+        /// </summary>
         private readonly List<Group> _groups = new List<Group>();
         
         /// <summary>

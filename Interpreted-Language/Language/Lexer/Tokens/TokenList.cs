@@ -19,9 +19,8 @@ namespace Interpreted_Language.Language.Lexer.Tokens
         /// thus when Next is called the index will be zero.
         /// </remarks>
         public int Index = -1;
-
         /// <summary>
-        ///     Gets the number of tokens in list.
+        /// Gets the number of tokens in list.
         /// </summary>
         public int Count => _tokens.Count;
 
@@ -30,6 +29,7 @@ namespace Interpreted_Language.Language.Lexer.Tokens
         /// </summary>
         /// <param name="index"></param>
         public Token this[int index] => _tokens[index];
+        
         /// <summary>
         /// 
         /// </summary>

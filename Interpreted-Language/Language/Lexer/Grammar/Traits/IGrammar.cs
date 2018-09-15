@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace Interpreted_Language.Language.Lexer.Grammar.Traits
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal interface IGrammar
     {
         /// <summary>

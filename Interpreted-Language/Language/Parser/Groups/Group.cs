@@ -6,11 +6,23 @@ using Interpreted_Language.Language.Parser.SyntaxTree.Nodes.Traits;
 
 namespace Interpreted_Language.Language.Parser.Groups
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class Group
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly List<IStatement> _statements = new List<IStatement>();
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
-        private Func<Dictionary<string, object>, Node> _createNodeFunc;
+        /// <summary>
+        /// 
+        /// </summary>
+        private Func<Dictionary<string, object>, INode> _createNodeFunc;
 
         /// <summary>
         /// Adds the statement to the group.
@@ -37,7 +49,7 @@ namespace Interpreted_Language.Language.Parser.Groups
         /// Creates the node.
         /// </summary>
         /// <param name="func">The function that creates the node.</param>
-        public void CreateNode(Func<Dictionary<string, object>, Node> func)
+        public void CreateNode(Func<Dictionary<string, object>, INode> func)
         {
             _createNodeFunc = func;
         }

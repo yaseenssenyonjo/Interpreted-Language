@@ -3,7 +3,7 @@ using Interpreted_Language.Language.Lexer.Tokens;
 namespace Interpreted_Language.Language.Parser.Groups.Statements.Traits
 {
     /// <summary>
-    /// 
+    /// Represents a statement.
     /// </summary>
     internal interface IStatement
     {
