@@ -16,7 +16,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// <summary>
         /// The value of the token to expect and ignore.
         /// </summary>
-        private readonly string _value = string.Empty;
+        private readonly object _value;
 
         public ExpectAndIgnore(TokenType type)
         {
@@ -27,7 +27,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         /// <param name="type">The expected token type.</param>
         /// <param name="value">The expected value of the token.</param>
-        public ExpectAndIgnore(TokenType type, string value) : this(type)
+        public ExpectAndIgnore(TokenType type, object value) : this(type)
         {
             _value = value;
         }
@@ -37,14 +37,14 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         /// <returns><c>true</c> if the current token type is the same, otherwise <c>false</c>.</returns>
         public bool Evaluate(Group group, TokenList tokens)
-        {
+        {            
             // Get the next token.
             var token = tokens.Next();
-            
+
             // Ignore the token by doing nothing with it.
-            
+
             // If the token type or token value (if set) is not the expected result, return false.
-            return token.Type == _tokenType && (string.IsNullOrEmpty(_value) || token.Value == _value);
+            return token.Type == _tokenType && (_value == null || token.Value.Equals(_value));
         }
     }
 }

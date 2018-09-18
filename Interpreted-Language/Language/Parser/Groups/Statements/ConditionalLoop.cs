@@ -8,7 +8,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
     internal class ConditionalLoop : IStatement
     {
         private readonly Predicate<TokenList> _condition;
-        private readonly Action<ConditionalLoop, TokenList> _function;
+        private readonly Action<ConditionalLoop> _function;
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
         
         /// <summary>
@@ -16,7 +16,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="function">The function to execute if the condition is true.</param>
-        public ConditionalLoop(Predicate<TokenList> condition, Action<ConditionalLoop, TokenList> function)
+        public ConditionalLoop(Predicate<TokenList> condition, Action<ConditionalLoop> function)
         {
             _condition = condition;
             _function = function;
@@ -31,7 +31,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
             // Keep calling the function until the condition is no longer satisfied.
             while (isConditionSatisfied)
             {
-                _function(this, tokens);
+                _function(this);
                 isConditionSatisfied = _condition.Invoke(tokens);
             }
             

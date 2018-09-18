@@ -41,5 +41,10 @@ namespace Interpreted_Language.Language.Lexer
         {
             IsIgnored = true;
         }
+
+        public int CompareTo(LexicalRule lexicalRule)
+        {
+            return TokenType.CompareTo(lexicalRule.TokenType);
+        }
     }
 }

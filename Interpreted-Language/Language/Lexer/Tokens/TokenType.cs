@@ -5,14 +5,14 @@ namespace Interpreted_Language.Language.Lexer.Tokens
     /// </summary>
     internal enum TokenType
     {
-        Equal,
-        String,
         Keyword,
         Identifier,
-        Tab,
-        Punctuation,
+        String,
         Integer,
         NewLine,
+        Equal,
+        Punctuation,
+        Tab,
         None
     }
 }

@@ -14,6 +14,6 @@ namespace Interpreted_Language.Language.Lexer.Grammar.Traits
         /// <summary>
         /// The grammar rules.
         /// </summary>
-        IEnumerable<LexicalRule> Rules { get; }
+        List<LexicalRule> Rules { get; }
     }
 }
