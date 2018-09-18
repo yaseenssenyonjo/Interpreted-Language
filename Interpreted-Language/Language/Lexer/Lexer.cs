@@ -26,6 +26,8 @@ namespace Interpreted_Language.Language.Lexer
         public Lexer(IGrammar grammar)
         {
             _grammar = grammar;
+            // Sort the grammar rules based on the internal integer value associated with the token type.
+            _grammar.Rules.Sort((x, y) => x.CompareTo(y));
         }
 
         /// <summary>

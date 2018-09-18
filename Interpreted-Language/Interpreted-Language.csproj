@@ -56,13 +56,22 @@
     <Compile Include="Language\Parser\Groups\Statements\ExpectAndIgnore.cs" />
     <Compile Include="Language\Parser\Groups\Statements\Traits\IStatement.cs" />
     <Compile Include="Language\Parser\Parser.cs" />
-    <Compile Include="Language\Parser\SyntaxTree\Nodes\AssignmentNode.cs" />
-    <Compile Include="Language\Parser\SyntaxTree\Nodes\SayNode.cs" />
-    <Compile Include="Language\Parser\SyntaxTree\Nodes\Traits\Node.cs" />
+    <Compile Include="Language\Parser\Syntax\Nodes\AssignmentNode.cs" />
+    <Compile Include="Language\Parser\Syntax\Nodes\LabelNode.cs" />
+    <Compile Include="Language\Parser\Syntax\Nodes\SayNode.cs" />
+    <Compile Include="Language\Parser\Syntax\Nodes\SpriteNode.cs" />
+    <Compile Include="Language\Parser\Syntax\Nodes\Traits\INode.cs" />
+    <Compile Include="Language\Parser\Syntax\SyntaxTree.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\label.rpy">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\script.rpy">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\single_line.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

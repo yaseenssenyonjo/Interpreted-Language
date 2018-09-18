@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Interpreted_Language.Language.Lexer.Tokens;
 using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
-using Interpreted_Language.Language.Parser.SyntaxTree.Nodes.Traits;
+using Interpreted_Language.Language.Parser.Syntax;
+using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
 namespace Interpreted_Language.Language.Parser.Groups
 {
@@ -53,13 +54,14 @@ namespace Interpreted_Language.Language.Parser.Groups
         {
             _createNodeFunc = func;
         }
-        
+
         /// <summary>
         /// Evaluates this group of statements.
         /// </summary>
+        /// <param name="syntaxTree">The syntax tree to add the nodes to.</param>
         /// <param name="tokens"></param>
         /// <returns><c>true</c> if all the statements evaluate to true, otherwise <c>false</c>.</returns>
-        public bool Evaluate(TokenList tokens)
+        public bool Evaluate(SyntaxTree syntaxTree, TokenList tokens)
         {
             var index = tokens.Index;
             foreach (var statement in _statements)
@@ -84,8 +86,8 @@ namespace Interpreted_Language.Language.Parser.Groups
             {
                 // Construct the node.
                 var node = _createNodeFunc.Invoke(_variables);
-                Console.WriteLine(node);
-                // TODO: Tell the syntax tree to add the node.
+                // Add the node to the syntax tree.
+                syntaxTree.Add(node);
             }
             
             // Clear all the variables so this group can be reused without issue.
