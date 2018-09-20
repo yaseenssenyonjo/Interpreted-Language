@@ -1,3 +1,5 @@
+using Interpreted_Language.Language.Interpreter.Traits;
+
 namespace Interpreted_Language.Language.Parser.Syntax.Nodes.Traits
 {
     /// <summary>
@@ -6,8 +8,14 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes.Traits
     internal interface INode
     {
         /// <summary>
+        /// The line number for this node.
+        /// </summary>
+        int LineNumber { set; }
+        
+        /// <summary>
         /// Executes this node.
         /// </summary>
-        void Execute();
+        /// <param name="context">The execution context this node is executing in.</param>
+        void Execute(IExecutionContext context);
     }
 }

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Interpreted_Language.Language.Lexer;
+using Interpreted_Language.Language.Lexer.Grammar;
 using Interpreted_Language.Language.Lexer.Grammar.Traits;
 using Interpreted_Language.Language.Lexer.Tokens;
 
-namespace Interpreted_Language.Language.Lexer.Grammar
+namespace Interpreted_Language.RenPy.Grammar
 {
     internal class RenPyGrammar : IGrammar
     {
@@ -13,7 +15,7 @@ namespace Interpreted_Language.Language.Lexer.Grammar
             // TODO: Try full understand how this string regex pattern functions.
             new LexicalRule(TokenType.String, @"^([""'`])(?:(?=(\\?))\2.)*?\1"), // https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
             new LexicalRule("^(#.*)"), // Matches and ignores comments (anything starting with a #).
-            new LexicalRule(TokenType.Keyword, @"^(\bcharacter\b|\broom\b|\bsprite\b|\blabel\b|\bpass\b)"), // TODO: Create a function that simplifies this using params.
+            new LexicalRule(TokenType.Keyword, GrammarHelper.CreateKeywordPattern("character", "room", "sprite", "label")), // TODO: Create a function that simplifies this using params.
             new LexicalRule(TokenType.Equal, "^(=)"),
             new LexicalRule(TokenType.Tab, @"^(\t| {4})"), // This pattern also treats 4 spaces consecutively as a tab.
             new LexicalRule("^(,)"),

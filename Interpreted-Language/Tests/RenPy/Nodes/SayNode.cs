@@ -1,6 +1,8 @@
+using System;
+using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
-namespace Interpreted_Language.Language.Parser.Syntax.Nodes
+namespace Interpreted_Language.RenPy.Nodes
 {
     internal class SayNode : INode
     {
@@ -14,6 +16,11 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
         private readonly string _dialogue;
         
         /// <summary>
+        /// The line number for this node.
+        /// </summary>
+        public int LineNumber { private get; set; }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="speakerName">The name of the speaker.</param>
@@ -24,9 +31,9 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
             _dialogue = dialogue;
         }
         
-        public void Execute()
+        public void Execute(IExecutionContext context)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine($"{_speakerName} says {_dialogue}");
         }
     }
 }

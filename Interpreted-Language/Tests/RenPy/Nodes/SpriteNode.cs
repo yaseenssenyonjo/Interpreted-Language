@@ -1,6 +1,8 @@
+using System;
+using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
-namespace Interpreted_Language.Language.Parser.Syntax.Nodes
+namespace Interpreted_Language.RenPy.Nodes
 {
     internal class SpriteNode : INode
     {
@@ -14,6 +16,11 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
         private readonly int _spriteId;
         
         /// <summary>
+        /// The line number for this node.
+        /// </summary>
+        public int LineNumber { private get; set; }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="characterName">The name of the character.</param>
@@ -24,9 +31,9 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
             _spriteId = spriteId;
         }
 
-        public void Execute()
+        public void Execute(IExecutionContext context)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine($"{_characterName} switch to sprite {_spriteId}");
         }
     }
 }

@@ -85,7 +85,8 @@ namespace Interpreted_Language.Language.Parser.Groups
             if (_createNodeFunc != null)
             {
                 // Construct the node.
-                var node = _createNodeFunc.Invoke(_variables);
+                var node = _createNodeFunc(_variables);
+                node.LineNumber = tokens[tokens.Index - 1].LineNumber; // gets the last token which will always be the new line. hacky implementation. TODO: try improve it.
                 // Add the node to the syntax tree.
                 syntaxTree.Add(node);
             }

@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Language\Interpreter\Interpreter.cs" />
+    <Compile Include="Language\Interpreter\Traits\ExecutionContext.cs" />
     <Compile Include="Language\Lexer\Exceptions\CaptureGroupException.cs" />
     <Compile Include="Language\Lexer\Exceptions\LexerException.cs" />
-    <Compile Include="Language\Lexer\Grammar\RenPyGrammar.cs" />
+    <Compile Include="Language\Lexer\Grammar\GrammarHelper.cs" />
     <Compile Include="Language\Lexer\Grammar\Traits\IGrammar.cs" />
     <Compile Include="Language\Lexer\Lexer.cs" />
     <Compile Include="Language\Lexer\LexicalRule.cs" />
@@ -56,22 +58,27 @@
     <Compile Include="Language\Parser\Groups\Statements\ExpectAndIgnore.cs" />
     <Compile Include="Language\Parser\Groups\Statements\Traits\IStatement.cs" />
     <Compile Include="Language\Parser\Parser.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\AssignmentNode.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\LabelNode.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\SayNode.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\SpriteNode.cs" />
     <Compile Include="Language\Parser\Syntax\Nodes\Traits\INode.cs" />
     <Compile Include="Language\Parser\Syntax\SyntaxTree.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Tests\RenPy\Grammar\RenPyGrammar.cs" />
+    <Compile Include="Tests\RenPy\Interpreter\RenPyExecutionContext.cs" />
+    <Compile Include="Tests\RenPy\Nodes\AssignmentNode.cs" />
+    <Compile Include="Tests\RenPy\Nodes\LabelNode.cs" />
+    <Compile Include="Tests\RenPy\Nodes\SayNode.cs" />
+    <Compile Include="Tests\RenPy\Nodes\SpriteNode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\label.rpy">
+    <Content Include="..\README.md">
+      <Link>README.md</Link>
+    </Content>
+    <Content Include="Tests\RenPy\Data\label.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\script.rpy">
+    <Content Include="Tests\RenPy\Data\script.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\single_line.rpy">
+    <Content Include="Tests\RenPy\Data\single_line.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

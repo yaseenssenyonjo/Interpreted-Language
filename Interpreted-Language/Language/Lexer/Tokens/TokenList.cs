@@ -18,21 +18,38 @@ namespace Interpreted_Language.Language.Lexer.Tokens
             set => _tokens[index] = value;
         }
         
+        /// <summary>
+        /// Adds the token.
+        /// </summary>
+        /// <param name="token">The token to be added.</param>
         public void Add(Token token)
         {
             _tokens.Add(token);
         }
-
+        
+        /// <summary>
+        /// Removes the token.
+        /// </summary>
+        /// <param name="token">The token to be removed.</param>
+        /// <returns></returns>
         public bool Remove(Token token)
         {
             return _tokens.Remove(token);
         }
         
+        /// <summary>
+        /// Determines whether the list contains the specified token.
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public bool Contains(Token token)
         {
             return _tokens.Contains(token);
         }
         
+        /// <summary>
+        /// Clears the list.
+        /// </summary>
         public void Clear()
         {
             _tokens.Clear();
@@ -57,7 +74,11 @@ namespace Interpreted_Language.Language.Lexer.Tokens
         {
             _tokens.CopyTo(array, arrayIndex);
         }
-
+        
+        /// <summary>
+        /// Gets the next token.
+        /// </summary>
+        /// <returns></returns>
         public Token Next()
         {
             return _tokens[Index++];
@@ -65,8 +86,7 @@ namespace Interpreted_Language.Language.Lexer.Tokens
 
         public IEnumerator<Token> GetEnumerator()
         {
-            for (Index = 0; Index < Count; Index++) yield return _tokens[Index];
-            Index = 0;
+            foreach (var token in _tokens) yield return token;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

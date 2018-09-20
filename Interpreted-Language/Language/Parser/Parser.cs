@@ -20,7 +20,7 @@ namespace Interpreted_Language.Language.Parser
         /// Creates a new filter group.
         /// </summary>
         /// <param name="groupName">(Optional) The name of the group.</param>
-        /// <remarks>The group name variable is there for naming groups and is .</remarks>
+        /// <remarks>The group name is syntax sugar to help remember what the group does.</remarks>
         public Group CreateGroup(string groupName = null)
         {
             var group = new Group();

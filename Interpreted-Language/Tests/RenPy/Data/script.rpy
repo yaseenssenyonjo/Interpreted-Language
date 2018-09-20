@@ -1,5 +1,6 @@
-character_a = character('character_name', 12, 15, 'hey')
+character_a = character('character_name')
 room_a = room('room_name')
+# character_b = character(24)
 
 label name:
         character_a '...'
