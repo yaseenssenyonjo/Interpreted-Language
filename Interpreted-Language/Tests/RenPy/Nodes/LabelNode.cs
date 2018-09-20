@@ -1,6 +1,8 @@
+using Interpreted_Language.Language.Interpreter.Traits;
+using Interpreted_Language.Language.Parser.Syntax;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
-namespace Interpreted_Language.Language.Parser.Syntax.Nodes
+namespace Interpreted_Language.RenPy.Nodes
 {
     internal class LabelNode : INode
     {
@@ -14,6 +16,11 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
         private readonly SyntaxTree _syntaxTree;
         
         /// <summary>
+        /// The line number for this node.
+        /// </summary>
+        public int LineNumber { private get; set; }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="name">The name of this label.</param>
@@ -24,9 +31,9 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes
             _syntaxTree = syntaxTree;
         }
         
-        public void Execute()
+        public void Execute(IExecutionContext context)
         {
-            throw new System.NotImplementedException();
+            // run through the label statements like an ienumerator.
         }
     }
 }
