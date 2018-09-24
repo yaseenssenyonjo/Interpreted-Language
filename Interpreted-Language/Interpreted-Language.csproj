@@ -61,12 +61,15 @@
     <Compile Include="Language\Parser\Syntax\Nodes\Traits\INode.cs" />
     <Compile Include="Language\Parser\Syntax\SyntaxTree.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Tests\RenPy\Grammar\RenPyGrammar.cs" />
-    <Compile Include="Tests\RenPy\Interpreter\RenPyExecutionContext.cs" />
-    <Compile Include="Tests\RenPy\Nodes\AssignmentNode.cs" />
-    <Compile Include="Tests\RenPy\Nodes\LabelNode.cs" />
-    <Compile Include="Tests\RenPy\Nodes\SayNode.cs" />
-    <Compile Include="Tests\RenPy\Nodes\SpriteNode.cs" />
+    <Compile Include="Tests\RenPy\Character.cs" />
+    <Compile Include="Tests\RenPy\Language\Grammar\RenPyGrammar.cs" />
+    <Compile Include="Tests\RenPy\Language\Interpreter\RenPyExecutionContext.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\AssignmentNode.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\JumpNode.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\LabelNode.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\NodeType.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\SayNode.cs" />
+    <Compile Include="Tests\RenPy\Language\Nodes\SpriteNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\README.md">
@@ -81,6 +84,9 @@
     <Content Include="Tests\RenPy\Data\single_line.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\RenPy\Language" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

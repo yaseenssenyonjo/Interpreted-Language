@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Interpreted_Language.Language.Lexer.Tokens;
 using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
 using Interpreted_Language.Language.Parser.Syntax;
@@ -24,6 +25,16 @@ namespace Interpreted_Language.Language.Parser.Groups
         /// 
         /// </summary>
         private Func<Dictionary<string, object>, INode> _createNodeFunc;
+        
+        /// <summary>
+        /// Does this group create a node.
+        /// </summary>
+        private bool _doesCreateNode;
+
+        public Group(bool doesCreateNode)
+        {
+            _doesCreateNode = doesCreateNode;
+        }
 
         /// <summary>
         /// Adds the statement to the group.
@@ -81,19 +92,28 @@ namespace Interpreted_Language.Language.Parser.Groups
                     
                 return false;
             }
-
-            if (_createNodeFunc != null)
-            {
-                // Construct the node.
-                var node = _createNodeFunc(_variables);
-                node.LineNumber = tokens[tokens.Index - 1].LineNumber; // gets the last token which will always be the new line. hacky implementation. TODO: try improve it.
-                // Add the node to the syntax tree.
-                syntaxTree.Add(node);
-            }
             
-            // Clear all the variables so this group can be reused without issue.
+            // Create a copy of the variables dictionary.
+            var variablesCopy = _variables.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            
+            // Clear all the variables before creating nodes.
+            // This allows for recursive parsing without throwing exceptions about keys
+            // being in use as the variables dictionary has already been cleared.
             _variables.Clear();
             
+            // If this group doesn't create a node return.
+            if (!_doesCreateNode) return true;
+            
+            // If this group doesn't have a create node function throw an exception.
+            if (_createNodeFunc == null) throw new Exception(); // todo: warn programmer that a group doesn't create a node. if this is intended behaviour tell them they to explicitly state that.
+            
+            // Construct the node.
+            var node = _createNodeFunc(variablesCopy);
+            // Set the line number.
+            node.LineNumber = tokens[tokens.Index - 1].LineNumber; // gets the last token which will always be the new line. hacky implementation. TODO: try improve it.
+            // Add the node to the syntax tree.
+            syntaxTree.Add(node);
+
             return true;
         }
     }

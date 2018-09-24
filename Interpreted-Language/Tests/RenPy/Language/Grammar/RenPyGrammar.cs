@@ -15,7 +15,7 @@ namespace Interpreted_Language.RenPy.Grammar
             // TODO: Try full understand how this string regex pattern functions.
             new LexicalRule(TokenType.String, @"^([""'`])(?:(?=(\\?))\2.)*?\1"), // https://stackoverflow.com/questions/171480/regex-grabbing-values-between-quotation-marks
             new LexicalRule("^(#.*)"), // Matches and ignores comments (anything starting with a #).
-            new LexicalRule(TokenType.Keyword, GrammarHelper.CreateKeywordPattern("character", "room", "sprite", "label")), // TODO: Create a function that simplifies this using params.
+            new LexicalRule(TokenType.Keyword, GrammarHelper.CreateKeywordPattern("character", "room", "sprite", "label", "jump")),
             new LexicalRule(TokenType.Equal, "^(=)"),
             new LexicalRule(TokenType.Tab, @"^(\t| {4})"), // This pattern also treats 4 spaces consecutively as a tab.
             new LexicalRule("^(,)"),

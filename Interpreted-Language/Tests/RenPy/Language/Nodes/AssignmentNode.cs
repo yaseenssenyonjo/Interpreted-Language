@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
+using Interpreted_Language.RenPy.Interpreter;
 
 namespace Interpreted_Language.RenPy.Nodes
 {
@@ -22,16 +23,17 @@ namespace Interpreted_Language.RenPy.Nodes
         /// </summary>
         private readonly object[] _methodArguments;
         
-        /// <summary>
-        /// The line number for this node.
-        /// </summary>
+        /// <inheritdoc />
+        public int NodeType { get; set; } = (int)Nodes.NodeType.Assignment;
+        /// <inheritdoc />
         public int LineNumber { private get; set; }
         
-        private static readonly IReadOnlyDictionary<string, Action<AssignmentNode>> MethodNameToAction = new Dictionary<string, Action<AssignmentNode>>
-        {
-            { "character", CharacterMethod },
-            { "room", RoomMethod }
-        };
+        private static readonly IReadOnlyDictionary<string, Action<AssignmentNode, RenPyExecutionContext>> MethodNameToAction = 
+            new Dictionary<string, Action<AssignmentNode, RenPyExecutionContext>>
+            {
+                { "character", CharacterMethod },
+                { "room", RoomMethod }
+            };
 
         /// <summary>
         /// 
@@ -45,44 +47,42 @@ namespace Interpreted_Language.RenPy.Nodes
             _methodName = methodName;
             _methodArguments = methodArguments;
         }
-        
-        // TODO: Implement exceptions here.
-
 
         public void Execute(IExecutionContext context)
         {
-            if (!MethodNameToAction.TryGetValue(_methodName, out var action)) throw new Exception("..."); // the given method "..." does not exist.
-            action(this);
+            if (!MethodNameToAction.TryGetValue(_methodName, out var action)) throw new Exception($"There was an error on line {LineNumber}. There is no method called '{_methodName}'.");
+            action(this, (RenPyExecutionContext)context);
         }
         
-        private static void CharacterMethod(AssignmentNode node)
+        private static void CharacterMethod(AssignmentNode node, RenPyExecutionContext context)
         {
             if (node._methodArguments.Length != 1) throw new Exception($"There was an error on line {node.LineNumber}. The character method got {node._methodArguments.Length} argument, expected 1 argument.");
-            var characterName = node._methodArguments[0] as string;
+            var characterId = node._methodArguments[0] as string;
             
-            var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, characterName);
+            var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, characterId);
             if(hasNullVariable) throw new Exception($"There was an error on line {node.LineNumber}. {errorMessage}");
             
-            // TODO: This would use the execution context (as variables created will be stored there.)
-            Console.WriteLine($"{characterName}: Create an instance if needed, then an alias as {node._variableName}.");
-            // todo if it already exists throw exception "there is already a variable called '...'"
+            Console.WriteLine($"Create an instance for {characterId} if needed, then try alias as {node._variableName}.");
+
+            if (!context.TryCreateCharacterAlias(node._variableName, characterId)) throw new Exception($"There was an error on {node.LineNumber}. There is already an alias called '{node._variableName}'.");
         }
         
-        private static void RoomMethod(AssignmentNode node)
+        private static void RoomMethod(AssignmentNode node, RenPyExecutionContext context)
         {
             if (node._methodArguments.Length != 1) throw new Exception($"There was an error on line {node.LineNumber}. The room method got {node._methodArguments.Length} argument, expected 1 argument.");
-            var roomName = node._methodArguments[0] as string;
+            var roomId = node._methodArguments[0] as string;
 
-            var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, roomName);
+            var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, roomId);
             if(hasNullVariable) throw new Exception($"There was an error on line {node.LineNumber}. {errorMessage}");
             
-            // TODO: This would use the execution context (as variables created will be stored there.)
-            Console.WriteLine($"Create a reference to '{roomName}' room if needed an alias as {node._variableName}.");
+            Console.WriteLine($"Create a reference to '{roomId}' room if needed an alias as {node._variableName}.");
+            
+            if (!context.TryCreateRoomAlias(node._variableName, roomId)) throw new Exception($"There was an error on {node.LineNumber}. There is already an alias called '{node._variableName}'.");
         }
 
         private static (bool, string) IsAnyVariableNull(IReadOnlyList<Type> expectedTypes, params object[] variables)
         {
-            if(expectedTypes.Count != variables.Length) throw new Exception(); // this is a developer mistake they need to match the expected types.
+            if(expectedTypes.Count != variables.Length) throw new Exception(); // todo: this is a developer mistake they need to match the expected types.
 
             for (var i = 0; i < variables.Length; i++)
             {

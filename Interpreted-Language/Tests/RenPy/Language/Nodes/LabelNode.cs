@@ -1,6 +1,8 @@
+using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
+using Interpreted_Language.RenPy.Interpreter;
 
 namespace Interpreted_Language.RenPy.Nodes
 {
@@ -15,9 +17,9 @@ namespace Interpreted_Language.RenPy.Nodes
         /// </summary>
         private readonly SyntaxTree _syntaxTree;
         
-        /// <summary>
-        /// The line number for this node.
-        /// </summary>
+        /// <inheritdoc />
+        public int NodeType { get; set; } = (int)Nodes.NodeType.Label;
+        /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         /// <summary>
@@ -33,7 +35,19 @@ namespace Interpreted_Language.RenPy.Nodes
         
         public void Execute(IExecutionContext context)
         {
-            // run through the label statements like an ienumerator.
+            var renPyContext = (RenPyExecutionContext) context;
+            
+            // When this method is first called by the interpreter the context will not
+            // have this label so the label registers itself thus when this node
+            // is next executed is due to it being called by another node.
+            
+            if (!renPyContext.HasLabel(_name))
+            {
+                renPyContext.RegisterLabel(_name, this);
+                return;
+            }
+            
+            foreach (var node in _syntaxTree) node.Execute(context);
         }
     }
 }
