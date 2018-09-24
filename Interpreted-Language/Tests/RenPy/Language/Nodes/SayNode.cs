@@ -15,9 +15,9 @@ namespace Interpreted_Language.RenPy.Nodes
         /// </summary>
         private readonly string _dialogue;
         
-        /// <summary>
-        /// The line number for this node.
-        /// </summary>
+        /// <inheritdoc />
+        public int NodeType { get; set; } = (int)Nodes.NodeType.Say;
+        /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         /// <summary>

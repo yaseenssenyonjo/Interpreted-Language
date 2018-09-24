@@ -10,6 +10,7 @@ using Interpreted_Language.Language.Parser.Groups.Statements;
 using Interpreted_Language.Language.Parser.Syntax;
 using Interpreted_Language.RenPy.Grammar;
 using Interpreted_Language.RenPy.Interpreter;
+using Interpreted_Language.RenPy.Language.Nodes;
 using Interpreted_Language.RenPy.Nodes;
 
 namespace Interpreted_Language
@@ -22,7 +23,7 @@ namespace Interpreted_Language
             
             foreach (var token in tokens)
             {
-                // Console.WriteLine($"{token.Type} | {token.Value} | {token.LineNumber}");
+                Console.WriteLine($"{token.Type} | {token.Value} | {token.LineNumber}");
             }
 
             var syntaxTree = Parse(tokens);
@@ -43,8 +44,12 @@ namespace Interpreted_Language
             var parser = new Parser();
             
             // This group matches any line that just has a new line.
-            parser.CreateGroup("New Lines")
+            parser.CreateGroup("New Lines", doesCreateNode: false)
                 .Add(new ExpectAndIgnore(TokenType.NewLine));
+            
+            // This group matches any line that just has a tab.
+            parser.CreateGroup("Tab", doesCreateNode: false)
+                .Add(new ExpectAndIgnore(TokenType.Tab));
             
             // This group matches variableName = methodName(arguments).
             parser.CreateGroup("Assignment")
@@ -100,6 +105,12 @@ namespace Interpreted_Language
                 .Add(new Capture(TokenType.Integer, "spriteId"))
                 .Add(new ExpectAndIgnore(TokenType.NewLine))
                 .CreateNode(variables => new SpriteNode((string)variables["characterName"], (int)variables["spriteId"]));
+            
+            parser.CreateGroup("Sprite")
+                .Add(new ExpectAndIgnore(TokenType.Keyword, "jump"))
+                .Add(new Capture(TokenType.Identifier, "labelName"))
+                .Add(new ExpectAndIgnore(TokenType.NewLine))
+                .CreateNode(variables => new JumpNode((string)variables["labelName"]));
             
             var syntaxTree = parser.Parse(tokens);
 

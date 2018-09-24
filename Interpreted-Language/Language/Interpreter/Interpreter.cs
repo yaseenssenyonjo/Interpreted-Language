@@ -21,13 +21,6 @@ namespace Interpreted_Language.Language.Interpreter
             {
                 node.Execute(_context);
             }
-            /*
-             * syntaxTree[0].Execute();
-            syntaxTree[1].Execute();
-            syntaxTree[2].Execute();
-             */
-            
-            // ...
         }
     }
 }

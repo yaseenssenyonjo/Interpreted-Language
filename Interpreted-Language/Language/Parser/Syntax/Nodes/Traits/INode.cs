@@ -8,6 +8,11 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes.Traits
     internal interface INode
     {
         /// <summary>
+        /// The type of node.
+        /// </summary>
+        int NodeType { get; set; }
+        
+        /// <summary>
         /// The line number for this node.
         /// </summary>
         int LineNumber { set; }
@@ -17,5 +22,7 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes.Traits
         /// </summary>
         /// <param name="context">The execution context this node is executing in.</param>
         void Execute(IExecutionContext context);
+        
+        // TODO: Create a custom operator overload that compares nodes using their node type.
     }
 }

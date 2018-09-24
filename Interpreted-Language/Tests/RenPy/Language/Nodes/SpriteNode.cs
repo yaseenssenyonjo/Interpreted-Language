@@ -1,6 +1,7 @@
 using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
+using Interpreted_Language.RenPy.Interpreter;
 
 namespace Interpreted_Language.RenPy.Nodes
 {
@@ -15,9 +16,9 @@ namespace Interpreted_Language.RenPy.Nodes
         /// </summary>
         private readonly int _spriteId;
         
-        /// <summary>
-        /// The line number for this node.
-        /// </summary>
+        /// <inheritdoc />
+        public int NodeType { get; set; } = (int)Nodes.NodeType.Sprite;
+        /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         /// <summary>
@@ -33,7 +34,9 @@ namespace Interpreted_Language.RenPy.Nodes
 
         public void Execute(IExecutionContext context)
         {
-            Console.WriteLine($"{_characterName} switch to sprite {_spriteId}");
+            Character character = ((RenPyExecutionContext)context).GetCharacter(_characterName);
+            Console.WriteLine($"{_characterName} switches to sprite {_spriteId}");
         }
+
     }
 }

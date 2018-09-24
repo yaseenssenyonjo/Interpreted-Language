@@ -21,9 +21,9 @@ namespace Interpreted_Language.Language.Parser
         /// </summary>
         /// <param name="groupName">(Optional) The name of the group.</param>
         /// <remarks>The group name is syntax sugar to help remember what the group does.</remarks>
-        public Group CreateGroup(string groupName = null)
+        public Group CreateGroup(string groupName = null, bool doesCreateNode = true)
         {
-            var group = new Group();
+            var group = new Group(doesCreateNode);
             _groups.Add(group);
             return group;
         }
