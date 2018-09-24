@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace Interpreted_Language.Language.Lexer.Grammar.Traits
 {
     /// <summary>
-    /// 
+    /// Represents a collection of structural rules that create the grammar.
     /// </summary>
     internal interface IGrammar
     {

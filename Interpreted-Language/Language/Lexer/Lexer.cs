@@ -8,6 +8,9 @@ using Interpreted_Language.Language.Lexer.Grammar.Traits;
 
 namespace Interpreted_Language.Language.Lexer
 {
+    /// <summary>
+    /// Represents a lexer.
+    /// </summary>
     internal class Lexer
     {
         /// <summary>
@@ -15,12 +18,12 @@ namespace Interpreted_Language.Language.Lexer
         /// </summary>
         private readonly IGrammar _grammar;
         /// <summary>
-        /// 
+        /// The whitespace regular expression.
         /// </summary>
         private static readonly Regex WhitespaceRegex = new Regex($@"((\r|\t|\v|\f| )*(?<NewLine>({Environment.NewLine}|\n)+)?)+", RegexOptions.Compiled);
         
         /// <summary>
-        /// Initializes a new instance of the <see cref="Interpreted_Language.Language.Lexer.Lexer"/> class.
+        /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Lexer.Lexer"/> class.
         /// </summary>
         /// <param name="grammar">The grammar rules.</param>
         public Lexer(IGrammar grammar)

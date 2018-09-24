@@ -10,8 +10,8 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements.Traits
         /// <summary>
         /// Determines whether this statement condition is met.
         /// </summary>
-        /// <param name="group"></param>
-        /// <param name="tokens"></param>
+        /// <param name="group">The group.</param>
+        /// <param name="tokens">The tokens.</param>
         /// <returns><c>true</c> if this statement condition is met, otherwise <c>false</c>.</returns>
         bool Evaluate(Group group, TokenList tokens);
     }

@@ -5,6 +5,9 @@ using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
 
 namespace Interpreted_Language.Language.Parser.Groups.Statements
 {
+    /// <summary>
+    /// Represents a loop that executes until the condition is not satisfied.
+    /// </summary>
     internal class ConditionalLoop : IStatement
     {
         private readonly Predicate<TokenList> _condition;
@@ -12,7 +15,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
         
         /// <summary>
-        /// 
+        /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Parser.Groups.Statements.ConditionalLoop"/> class.
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="function">The function to execute if the condition is true.</param>
@@ -22,6 +25,12 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
             _function = function;
         }
         
+        /// <summary>
+        /// Determines whether the loop can execute.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns><c>true</c> if the loop has executed, otherwise <c>false</c></returns>
         public bool Evaluate(Group group, TokenList tokens)
         {
             var isConditionSatisfied = _condition.Invoke(tokens);
@@ -49,10 +58,10 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         /// <param name="variableName">The name of the variable.</param>
         /// <param name="variableValue">The value to default to if the variable doesn't exist.</param>
-        /// <returns></returns>
+        /// <returns>The value associated with the specified name.</returns>
         public object Get(string variableName, object variableValue)
         {
-            if (_variables.TryGetValue(variableName, out var value))  return value;
+            if (_variables.TryGetValue(variableName, out var value)) return value;
             _variables.Add(variableName, variableValue);
             return variableValue;
         }

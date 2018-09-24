@@ -41,7 +41,12 @@ namespace Interpreted_Language.Language.Lexer
         {
             IsIgnored = true;
         }
-
+        
+        /// <summary>
+        /// Compares this instance to a specified lexical rule and returns an indication of their relative values.
+        /// </summary>
+        /// <param name="lexicalRule">The lexical rule to compare to.</param>
+        /// <returns></returns>
         public int CompareTo(LexicalRule lexicalRule)
         {
             return TokenType.CompareTo(lexicalRule.TokenType);
