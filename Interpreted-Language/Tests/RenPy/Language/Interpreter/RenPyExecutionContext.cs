@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Interpreted_Language.Language.Interpreter.Traits;
-using Interpreted_Language.RenPy.Nodes;
+using Interpreted_Language.RenPy.Language.Nodes;
 
-namespace Interpreted_Language.RenPy.Interpreter
+namespace Interpreted_Language.RenPy.Language.Interpreter
 {
     internal class RenPyExecutionContext : IExecutionContext
     {
         private readonly Dictionary<string, LabelNode> _labels = new Dictionary<string, LabelNode>();
         private readonly Dictionary<string, Character> _characters = new Dictionary<string, Character>();
-        private Dictionary<string, object> _rooms = new Dictionary<string, object>(); // todo
+        private readonly Dictionary<string, object> _rooms = new Dictionary<string, object>(); // todo
         
         public bool HasLabel(string name)
         {

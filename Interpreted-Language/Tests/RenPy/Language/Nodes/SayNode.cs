@@ -2,7 +2,7 @@ using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
-namespace Interpreted_Language.RenPy.Nodes
+namespace Interpreted_Language.RenPy.Language.Nodes
 {
     internal class SayNode : INode
     {

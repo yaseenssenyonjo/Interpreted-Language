@@ -1,9 +1,9 @@
 using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
-using Interpreted_Language.RenPy.Interpreter;
+using Interpreted_Language.RenPy.Language.Interpreter;
 
-namespace Interpreted_Language.RenPy.Nodes
+namespace Interpreted_Language.RenPy.Language.Nodes
 {
     internal class SpriteNode : INode
     {
@@ -34,7 +34,7 @@ namespace Interpreted_Language.RenPy.Nodes
 
         public void Execute(IExecutionContext context)
         {
-            Character character = ((RenPyExecutionContext)context).GetCharacter(_characterName);
+            var character = ((RenPyExecutionContext)context).GetCharacter(_characterName);
             Console.WriteLine($"{_characterName} switches to sprite {_spriteId}");
         }
 

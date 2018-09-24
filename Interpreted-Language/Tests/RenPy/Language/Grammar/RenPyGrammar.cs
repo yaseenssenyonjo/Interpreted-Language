@@ -4,7 +4,7 @@ using Interpreted_Language.Language.Lexer.Grammar;
 using Interpreted_Language.Language.Lexer.Grammar.Traits;
 using Interpreted_Language.Language.Lexer.Tokens;
 
-namespace Interpreted_Language.RenPy.Grammar
+namespace Interpreted_Language.RenPy.Language.Grammar
 {
     internal class RenPyGrammar : IGrammar
     {
