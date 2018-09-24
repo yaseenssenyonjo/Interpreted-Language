@@ -9,28 +9,32 @@ using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 namespace Interpreted_Language.Language.Parser.Groups
 {
     /// <summary>
-    /// 
+    /// Represents a group.
     /// </summary>
     internal class Group
     {
         /// <summary>
-        /// 
+        /// The statements that form this group.
         /// </summary>
         private readonly List<IStatement> _statements = new List<IStatement>();
         /// <summary>
-        /// 
+        /// The captured variables.
         /// </summary>
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
         /// <summary>
-        /// 
+        /// The function that creates the node.
         /// </summary>
         private Func<Dictionary<string, object>, INode> _createNodeFunc;
         
         /// <summary>
-        /// Does this group create a node.
+        /// Does this group create a node?
         /// </summary>
-        private bool _doesCreateNode;
-
+        private readonly bool _doesCreateNode;
+        
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Parser.Groups.Group"/> class.
+        /// </summary>
+        /// <param name="doesCreateNode">Does this group create a node?</param>
         public Group(bool doesCreateNode)
         {
             _doesCreateNode = doesCreateNode;

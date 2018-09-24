@@ -7,7 +7,7 @@ using Interpreted_Language.Language.Parser.Syntax;
 namespace Interpreted_Language.Language.Parser
 {
     /// <summary>
-    /// 
+    /// Represents a parser.
     /// </summary>
     internal class Parser
     {

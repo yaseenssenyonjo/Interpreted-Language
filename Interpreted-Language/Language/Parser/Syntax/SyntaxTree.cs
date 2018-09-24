@@ -4,6 +4,9 @@ using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
 namespace Interpreted_Language.Language.Parser.Syntax
 {
+    /// <summary>
+    /// Represents a syntax tree.
+    /// </summary>
     internal class SyntaxTree : IEnumerable<INode>
     {
         /// <summary>
@@ -11,6 +14,10 @@ namespace Interpreted_Language.Language.Parser.Syntax
         /// </summary>
         private readonly List<INode> _nodes = new List<INode>();
         
+        /// <summary>
+        /// Gets the node at the specified index.
+        /// </summary>
+        /// <param name="index">The zero-based index of the node to get.</param>
         public INode this[int index] => _nodes[index];
 
         /// <summary>
@@ -22,7 +29,6 @@ namespace Interpreted_Language.Language.Parser.Syntax
             _nodes.Add(node);
         }
         
-        // TODO: Use nodes for when executing (maybe make it a queue - FIFO).
         public IEnumerator<INode> GetEnumerator()
         {
             foreach (var node in _nodes) yield return node;

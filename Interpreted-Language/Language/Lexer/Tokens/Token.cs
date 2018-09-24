@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Interpreted_Language.Language.Lexer.Tokens
 {
@@ -21,42 +22,35 @@ namespace Interpreted_Language.Language.Lexer.Tokens
         /// </summary>
         public readonly int LineNumber;
         
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Lexer.Tokens.Token"/> class.
+        /// </summary>
+        /// <param name="type">The type of token.</param>
+        /// <param name="value">The value of the token.</param>
+        /// <param name="lineNumber">The line number of the token.</param>
         public Token(TokenType type, string value, int lineNumber)
         {
             Type = type;
             Value = ProcessValue(value);
             LineNumber = lineNumber;
         }
-
+        
+        /// <summary>
+        /// Processes the value.
+        /// </summary>
+        /// <param name="value">The value to process.</param>
+        /// <returns>An unescaped string if the token is a string, a 32-bit integer if the token is an integer; otherwise the specified value.</returns>
         private object ProcessValue(string value)
         {
             switch (Type)
             {
                 case TokenType.String:
                 {
-                    var stringBuilder = new StringBuilder();
-                    // The first character is the string delimiter.
-                    var stringDelimiter = value[0];
-                    // Starting from 1 skips the first character and minus 1 from the length skips the last character which
-                    // are both quotation marks.
-                    for (var i = 1; i < value.Length - 1; i++)
-                    {
-                        var currentCharacter = value[i];
-                        var nextCharacter = i + 1 < value.Length - 1 ? value[i + 1] : '\x00';
-                        // If the current character is a backslash and the next character is the string delimiter.
-                        if (currentCharacter == '\\' && nextCharacter == stringDelimiter)
-                        {
-                            // Append the string delimiter.
-                            stringBuilder.Append(nextCharacter);
-                            // Increment i only once here as the for loop will do it again thus skipping to the right character.
-                            i++; 
-                            continue;
-                        }
-                    
-                        stringBuilder.Append(currentCharacter);
-                    }
-                
-                    return stringBuilder.ToString();
+                    // Unescapes the string.
+                    var unescapedValue = Regex.Unescape(value);
+                    // Strips the quotes by skipping the first and last character.
+                    // Subtracting two as the length starts from 1.
+                    return unescapedValue.Substring(1, unescapedValue.Length - 2);
                 }
                 
                 case TokenType.Integer:

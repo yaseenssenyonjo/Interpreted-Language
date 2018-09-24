@@ -4,7 +4,7 @@ using Interpreted_Language.Language.Parser.Groups.Statements.Traits;
 namespace Interpreted_Language.Language.Parser.Groups.Statements
 {
     /// <summary>
-    /// Finds and stores a specific token.
+    /// Finds and captures a specific token.
     /// </summary>
     internal class Capture : IStatement
     {
@@ -18,16 +18,22 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         private readonly string _name;
         
         /// <summary>
-        /// 
+        /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Parser.Groups.Statements.Capture"/> class.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="name"></param>
+        /// <param name="type">The type of token to be captured.</param>
+        /// <param name="name">The name to associate the captured value with.</param>
         public Capture(TokenType type, string name)
         {
             _tokenType = type;
             _name = name;
         }
-
+        
+        /// <summary>
+        /// Determines whether a specific token can be found and captured.
+        /// </summary>
+        /// <param name="group">The group.</param>
+        /// <param name="tokens">The tokens.</param>
+        /// <returns></returns>
         public bool Evaluate(Group group, TokenList tokens)
         {
             // Get the next token.
