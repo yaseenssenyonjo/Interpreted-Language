@@ -1,4 +1,4 @@
-namespace Interpreted_Language.RenPy.Nodes
+namespace Interpreted_Language.RenPy.Language.Nodes
 {
     internal enum NodeType
     {

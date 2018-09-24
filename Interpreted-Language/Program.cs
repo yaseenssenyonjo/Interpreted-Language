@@ -8,10 +8,9 @@ using Interpreted_Language.Language.Lexer.Grammar.Traits;
 using Interpreted_Language.Language.Parser;
 using Interpreted_Language.Language.Parser.Groups.Statements;
 using Interpreted_Language.Language.Parser.Syntax;
-using Interpreted_Language.RenPy.Grammar;
-using Interpreted_Language.RenPy.Interpreter;
+using Interpreted_Language.RenPy.Language.Grammar;
+using Interpreted_Language.RenPy.Language.Interpreter;
 using Interpreted_Language.RenPy.Language.Nodes;
-using Interpreted_Language.RenPy.Nodes;
 
 namespace Interpreted_Language
 {

@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
-using Interpreted_Language.RenPy.Interpreter;
+using Interpreted_Language.RenPy.Language.Interpreter;
 
-namespace Interpreted_Language.RenPy.Nodes
+namespace Interpreted_Language.RenPy.Language.Nodes
 {
     internal class AssignmentNode : INode
     {
