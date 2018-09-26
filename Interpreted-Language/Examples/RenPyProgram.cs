@@ -104,7 +104,6 @@ namespace Interpreted_Language
                 .CreateNode(variables => new JumpNode((string)variables["labelName"]));
             
             var syntaxTree = parser.Parse(tokens);
-
             return syntaxTree;
         }
 
