@@ -15,14 +15,12 @@ namespace Interpreted_Language.RenPy.Language.Nodes
         /// The syntax tree for this label.
         /// </summary>
         private readonly SyntaxTree _syntaxTree;
-        
-        /// <inheritdoc />
-        public int NodeType { get; set; } = (int)Nodes.NodeType.Label;
+
         /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         /// <summary>
-        /// 
+        /// Initialises a new instance of the <see cref="Interpreted_Language.RenPy.Language.Nodes.LabelNode"/> class.
         /// </summary>
         /// <param name="name">The name of this label.</param>
         /// <param name="syntaxTree">The syntax tree for this label.</param>
@@ -40,7 +38,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             // have this label so the label registers itself thus when this node
             // is next executed is due to it being called by another node.
             
-            if (!renPyContext.HasLabel(_name))
+            if (!renPyContext.IsLabelRegistered(_name))
             {
                 renPyContext.RegisterLabel(_name, this);
                 return;

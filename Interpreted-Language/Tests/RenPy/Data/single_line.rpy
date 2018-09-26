@@ -1,1 +1,0 @@
-character_a sprite 12

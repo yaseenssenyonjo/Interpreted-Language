@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,14 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
+      <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Examples\JSProgram.cs" />
+    <Compile Include="Examples\JS\Language\Grammar\JSGrammar.cs" />
+    <Compile Include="Examples\JS\Language\Interpreter\JSExecutionContext.cs" />
+    <Compile Include="Examples\JS\Language\Nodes\ConsoleNode.cs" />
+    <Compile Include="Examples\RenPyProgram.cs" />
     <Compile Include="Language\Interpreter\Interpreter.cs" />
-    <Compile Include="Language\Interpreter\Traits\ExecutionContext.cs" />
+    <Compile Include="Language\Interpreter\Traits\IExecutionContext.cs" />
     <Compile Include="Language\Lexer\Exceptions\CaptureGroupException.cs" />
     <Compile Include="Language\Lexer\Exceptions\LexerException.cs" />
     <Compile Include="Language\Lexer\Grammar\GrammarHelper.cs" />
@@ -60,35 +70,33 @@
     <Compile Include="Language\Parser\Parser.cs" />
     <Compile Include="Language\Parser\Syntax\Nodes\Traits\INode.cs" />
     <Compile Include="Language\Parser\Syntax\SyntaxTree.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Tests\RenPy\Character.cs" />
-    <Compile Include="Tests\RenPy\Language\Grammar\RenPyGrammar.cs" />
-    <Compile Include="Tests\RenPy\Language\Interpreter\RenPyExecutionContext.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\AssignmentNode.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\JumpNode.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\LabelNode.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\NodeType.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\SayNode.cs" />
-    <Compile Include="Tests\RenPy\Language\Nodes\SpriteNode.cs" />
+    <Compile Include="Examples\RenPy\Character.cs" />
+    <Compile Include="Examples\RenPy\Language\Grammar\RenPyGrammar.cs" />
+    <Compile Include="Examples\RenPy\Language\Interpreter\RenPyExecutionContext.cs" />
+    <Compile Include="Examples\RenPy\Language\Nodes\AssignmentNode.cs" />
+    <Compile Include="Examples\RenPy\Language\Nodes\JumpNode.cs" />
+    <Compile Include="Examples\RenPy\Language\Nodes\LabelNode.cs" />
+    <Compile Include="Examples\RenPy\Language\Nodes\SayNode.cs" />
+    <Compile Include="Examples\RenPy\Language\Nodes\SpriteNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\README.md">
       <Link>README.md</Link>
     </Content>
-    <Content Include="Tests\RenPy\Data\label.rpy">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Tests\RenPy\Data\script.rpy">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Tests\RenPy\Data\single_line.rpy">
+    <Content Include="Examples\RenPy\Data\script.rpy">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Tests\RenPy\Language" />
+    <Folder Include="Examples\RenPy\Language" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.1\build\NUnit.props'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

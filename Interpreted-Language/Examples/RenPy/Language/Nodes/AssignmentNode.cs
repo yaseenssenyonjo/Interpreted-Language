@@ -22,8 +22,6 @@ namespace Interpreted_Language.RenPy.Language.Nodes
         private readonly object[] _methodArguments;
         
         /// <inheritdoc />
-        public int NodeType { get; set; } = (int)Nodes.NodeType.Assignment;
-        /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         private static readonly IReadOnlyDictionary<string, Action<AssignmentNode, RenPyExecutionContext>> MethodNameToAction = 
@@ -34,7 +32,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             };
 
         /// <summary>
-        /// 
+        /// Initialises a new instance of the <see cref="Interpreted_Language.RenPy.Language.Nodes.AssignmentNode"/> class.
         /// </summary>
         /// <param name="variableName">The name of the variable.</param>
         /// <param name="methodName">The name of the method.</param>
@@ -60,7 +58,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, characterId);
             if(hasNullVariable) throw new Exception($"There was an error on line {node.LineNumber}. {errorMessage}");
             
-            Console.WriteLine($"Create an instance for {characterId} if needed, then try alias as {node._variableName}.");
+            Console.WriteLine($"Created an instance for ;{characterId}' using alias {node._variableName}.");
 
             if (!context.TryCreateCharacterAlias(node._variableName, characterId)) throw new Exception($"There was an error on {node.LineNumber}. There is already an alias called '{node._variableName}'.");
         }
@@ -73,14 +71,14 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, roomId);
             if(hasNullVariable) throw new Exception($"There was an error on line {node.LineNumber}. {errorMessage}");
             
-            Console.WriteLine($"Create a reference to '{roomId}' room if needed an alias as {node._variableName}.");
+            Console.WriteLine($"Created a reference to '{roomId}' using alias {node._variableName}.");
             
             if (!context.TryCreateRoomAlias(node._variableName, roomId)) throw new Exception($"There was an error on {node.LineNumber}. There is already an alias called '{node._variableName}'.");
         }
 
         private static (bool, string) IsAnyVariableNull(IReadOnlyList<Type> expectedTypes, params object[] variables)
         {
-            if(expectedTypes.Count != variables.Length) throw new Exception(); // todo: this is a developer mistake they need to match the expected types.
+            if(expectedTypes.Count != variables.Length) throw new Exception("Invalid number of expected types or variables specified.");
 
             for (var i = 0; i < variables.Length; i++)
             {

@@ -1,10 +1,9 @@
-﻿using System;
 using System.IO;
 using System.Linq;
 using Interpreted_Language.Language.Interpreter;
 using Interpreted_Language.Language.Lexer;
-using Interpreted_Language.Language.Lexer.Tokens;
 using Interpreted_Language.Language.Lexer.Grammar.Traits;
+using Interpreted_Language.Language.Lexer.Tokens;
 using Interpreted_Language.Language.Parser;
 using Interpreted_Language.Language.Parser.Groups.Statements;
 using Interpreted_Language.Language.Parser.Syntax;
@@ -14,19 +13,12 @@ using Interpreted_Language.RenPy.Language.Nodes;
 
 namespace Interpreted_Language
 {
-    internal static class Program
+    internal static class RenPyProgram
     {
-        public static void Main()
+        public static void Usage()
         {
-            var tokens = Tokenise(new RenPyGrammar(), "./Tests/RenPy/Data/script.rpy");
-            
-            foreach (var token in tokens)
-            {
-                Console.WriteLine($"{token.Type} | {token.Value} | {token.LineNumber}");
-            }
-
+            var tokens = Tokenise(new RenPyGrammar(), "./Examples/RenPy/Data/script.rpy");
             var syntaxTree = Parse(tokens);
-
             Execute(syntaxTree);
         }
         
@@ -34,7 +26,7 @@ namespace Interpreted_Language
         {           
             var lexer = new Lexer(grammar);
             var tokens = lexer.Tokenise(File.ReadAllText(path));
-
+            
             return tokens;
         }
         
@@ -124,8 +116,3 @@ namespace Interpreted_Language
         }
     }
 }
-
-// TODO: Unit Tests.
-    // - Lexer creates expected tokens.
-    // - Syntax Tree parses tokens correctly (count and label)
-    // - Throws an exception for unexpected variable types
