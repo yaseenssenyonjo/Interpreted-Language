@@ -53,7 +53,6 @@ console.log('...')";
                 .Add(new ExpectAndIgnore(TokenType.NewLine))
                 .CreateNode(variables => new ConsoleNode((string)variables["methodName"], ((Token[])variables["arguments"]).Select(t => t.Value).ToArray()));
 
-            
             var syntaxTree = parser.Parse(tokens);
             return syntaxTree;
         }
