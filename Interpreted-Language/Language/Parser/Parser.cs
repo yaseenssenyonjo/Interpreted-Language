@@ -15,11 +15,12 @@ namespace Interpreted_Language.Language.Parser
         /// The filter groups.
         /// </summary>
         private readonly List<Group> _groups = new List<Group>();
-        
+
         /// <summary>
         /// Creates a new filter group.
         /// </summary>
-        /// <param name="groupName">(Optional) The name of the group.</param>
+        /// <param name="groupName">The name of the group.</param>
+        /// <param name="doesCreateNode">Should this group create a node?</param>
         /// <remarks>The group name is syntax sugar to help remember what the group does.</remarks>
         public Group CreateGroup(string groupName = null, bool doesCreateNode = true)
         {

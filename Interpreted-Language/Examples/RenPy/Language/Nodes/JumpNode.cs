@@ -7,11 +7,15 @@ namespace Interpreted_Language.RenPy.Language.Nodes
 {
     internal class JumpNode : INode
     {
-        private string _labelName;
+        private readonly string _labelName;
         
-        public int NodeType { get; set; }
-        public int LineNumber { get; set; }
-
+        /// <inheritdoc />
+        public int LineNumber { private get; set; }
+        
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Interpreted_Language.RenPy.Language.Nodes.JumpNode"/> class.
+        /// </summary>
+        /// <param name="labelName"></param>
         public JumpNode(string labelName)
         {
             _labelName = labelName;

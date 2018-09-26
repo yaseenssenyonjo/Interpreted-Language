@@ -109,12 +109,12 @@ namespace Interpreted_Language.Language.Parser.Groups
             if (!_doesCreateNode) return true;
             
             // If this group doesn't have a create node function throw an exception.
-            if (_createNodeFunc == null) throw new Exception(); // todo: warn programmer that a group doesn't create a node. if this is intended behaviour tell them they to explicitly state that.
+            if (_createNodeFunc == null) throw new Exception("The group does not create a node. If this intended behaviour explicitly state that in the Group constructor.");
             
             // Construct the node.
             var node = _createNodeFunc(variablesCopy);
-            // Set the line number.
-            node.LineNumber = tokens[tokens.Index - 1].LineNumber; // gets the last token which will always be the new line. hacky implementation. TODO: try improve it.
+            // Set the line number by getting the last token which will always be a new line token.
+            node.LineNumber = tokens[tokens.Index - 1].LineNumber; 
             // Add the node to the syntax tree.
             syntaxTree.Add(node);
 

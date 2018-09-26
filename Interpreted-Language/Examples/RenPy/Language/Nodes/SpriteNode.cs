@@ -15,14 +15,12 @@ namespace Interpreted_Language.RenPy.Language.Nodes
         /// The id of the sprite to switch to.
         /// </summary>
         private readonly int _spriteId;
-        
-        /// <inheritdoc />
-        public int NodeType { get; set; } = (int)Nodes.NodeType.Sprite;
+
         /// <inheritdoc />
         public int LineNumber { private get; set; }
         
         /// <summary>
-        /// 
+        /// Initialises a new instance of the <see cref="Interpreted_Language.RenPy.Language.Nodes.SpriteNode"/> class.
         /// </summary>
         /// <param name="characterName">The name of the character.</param>
         /// <param name="spriteId">The id of the sprite.</param>
@@ -34,8 +32,8 @@ namespace Interpreted_Language.RenPy.Language.Nodes
 
         public void Execute(IExecutionContext context)
         {
-            var character = ((RenPyExecutionContext)context).GetCharacter(_characterName);
-            Console.WriteLine($"{_characterName} switches to sprite {_spriteId}");
+            var character = ((RenPyExecutionContext)context).GetCharacter(_characterName, LineNumber);
+            Console.WriteLine($"{character.Id} switches to sprite {_spriteId}");
         }
 
     }

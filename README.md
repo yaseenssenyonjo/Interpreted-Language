@@ -1,5 +1,5 @@
 # Interpreted Language
-Interpreted Language is a **collection of modular systems** that work together to create an interpreted language to show how they are used.
+Interpreted Language is a **collection of modular systems** that work together to create an interpreted language which in turn illustrates how the systems function.
 
 ## Systems
 - A lexer that uses **regular expressions** allowing the developer to create simple or complex regular expressions meaning that any data can be tokenised.
@@ -7,6 +7,10 @@ Interpreted Language is a **collection of modular systems** that work together t
 - An interpreter that uses **execution contexts** to allow for required variables and methods to be quickly implemented and accessible for all nodes.
 
 ## Usage.
+
+You can see a fully implemented scripting language inspired by Ren'Py [here](/Interpreted-Language/Examples/RenPy/Language).
+Below are examples illustrating how to accomplish certain tasks. 
+
 ### Creating grammar rules.
 	internal class JSGrammar : IGrammar
     {
@@ -15,7 +19,8 @@ Interpreted Language is a **collection of modular systems** that work together t
         {
             new LexicalRule(TokenType.Identifier, "^([_A-Za-z][_A-Za-z0-9]*)"),
             new LexicalRule(TokenType.String, @"^([""'`])(?:(?=(\\?))\2.)*?\1"),
-			new LexicalRule(TokenType.Punctuation, "^([.|(|)])")
+            new LexicalRule(TokenType.Punctuation, "^([.|(|)])"),
+            new LexicalRule(TokenType.Keyword, GrammarHelper.CreateKeywordPattern("console"))
         };
     }
 
@@ -33,13 +38,14 @@ Interpreted Language is a **collection of modular systems** that work together t
 ### Parser.
 	var parser = new Parser();
 
-	parser.CreateGroup("console.method_name(arguments)")
-		.Add(new Capture(TokenType.Identifier, "console"))
-		.Add(new ExpectAndIgnore(TokenType.Punctuation, "."))
-		.Add(new Capture(TokenType.Identifier, "methodName"))
-		.Add(new ExpectAndIgnore(TokenType.Punctuation, "("))
-		.Add(new ConsumeUntil(TokenType.Punctuation, ")", "arguments"))
-		.CreateNode(variables => new ConsoleNode((string)methodName, ((Token[])variables["arguments"]).Select(t => t.Value).ToArray())));
+    parser.CreateGroup("console.method_name(arguments)")
+        .Add(new Capture(TokenType.Keyword, "console"))
+        .Add(new ExpectAndIgnore(TokenType.Punctuation, "."))
+        .Add(new Capture(TokenType.Identifier, "methodName"))
+        .Add(new ExpectAndIgnore(TokenType.Punctuation, "("))
+        .Add(new ConsumeUntil(TokenType.Punctuation, ")", "arguments"))
+        .Add(new ExpectAndIgnore(TokenType.NewLine))
+        .CreateNode(variables => new ConsoleNode((string)variables["methodName"], ((Token[])variables["arguments"]).Select(t => t.Value).ToArray()));
 		
 	var syntaxTree = parser.Parse(tokens);
 	
@@ -52,6 +58,8 @@ Interpreted Language is a **collection of modular systems** that work together t
 ### Execution Context.
     internal class JSExecutionContext : IExecutionContext
     {
+		// Nothing is need in this example.
+		// View the fully implemented scripting language to see how execution context can be used.
     }
 
 ### Node.
@@ -66,7 +74,7 @@ Interpreted Language is a **collection of modular systems** that work together t
 			_methodArguments = methodArguments;
 		}
 
-		public void Execute(ExecutionContext context)
+		public void Execute(IExecutionContext context)
 		{
 			switch(_methodName)
 			{

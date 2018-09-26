@@ -60,7 +60,7 @@ namespace Interpreted_Language.Language.Lexer.Tokens
         /// Determines whether the list contains the specified token.
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns><c>true</c> if token is found in the list; otherwise, <c>false</c></returns>
         public bool Contains(Token token)
         {
             return _tokens.Contains(token);
