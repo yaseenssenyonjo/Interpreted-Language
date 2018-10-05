@@ -1,5 +1,6 @@
 using System;
 using Interpreted_Language.Language.Interpreter.Traits;
+using Interpreted_Language.Language.Parser.Syntax.Nodes;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 
 namespace Interpreted_Language.JS.Language.Nodes
@@ -29,7 +30,7 @@ namespace Interpreted_Language.JS.Language.Nodes
             _methodArguments = methodArguments;
         }
         
-        public void Execute(IExecutionContext context)
+        public BlockingType Execute(IExecutionContext context)
         {
             switch(_methodName)
             {
@@ -41,6 +42,8 @@ namespace Interpreted_Language.JS.Language.Nodes
                     Console.Clear();
                     break;
             }
+
+            return BlockingType.NonBlocking;
         }
     }
 }

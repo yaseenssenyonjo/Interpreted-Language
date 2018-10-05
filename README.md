@@ -74,7 +74,7 @@ Below are examples illustrating how to accomplish certain tasks.
 			_methodArguments = methodArguments;
 		}
 
-		public void Execute(IExecutionContext context)
+		public BlockingType Execute(IExecutionContext context)
 		{
 			switch(_methodName)
 			{
@@ -86,5 +86,7 @@ Below are examples illustrating how to accomplish certain tasks.
 			        Console.Clear();
 			        break;
 			}
+			
+			return BlockingType.NonBlocking;
 		}
 	}

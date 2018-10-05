@@ -1,5 +1,7 @@
+using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax;
+using Interpreted_Language.Language.Parser.Syntax.Nodes;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 using Interpreted_Language.RenPy.Language.Interpreter;
 
@@ -30,7 +32,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             _syntaxTree = syntaxTree;
         }
         
-        public void Execute(IExecutionContext context)
+        public BlockingType Execute(IExecutionContext context)
         {
             var renPyContext = (RenPyExecutionContext) context;
             
@@ -41,10 +43,13 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             if (!renPyContext.IsLabelRegistered(_name))
             {
                 renPyContext.RegisterLabel(_name, this);
-                return;
+                return BlockingType.NonBlocking;
             }
+
+            var interpreter = new Interpreted_Language.Language.Interpreter.Interpreter(context);
+            interpreter.Execute(_syntaxTree);
             
-            foreach (var node in _syntaxTree) node.Execute(context);
+            return BlockingType.NonBlocking;
         }
     }
 }

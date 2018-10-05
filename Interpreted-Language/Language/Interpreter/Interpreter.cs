@@ -1,5 +1,7 @@
+using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax;
+using Interpreted_Language.Language.Parser.Syntax.Nodes;
 
 namespace Interpreted_Language.Language.Interpreter
 {
@@ -30,7 +32,16 @@ namespace Interpreted_Language.Language.Interpreter
         {
             foreach (var node in syntaxTree)
             {
-                node.Execute(_context);
+                if (node.Execute(_context) == BlockingType.Blocking)
+                {
+                    // TODO: Come up with an alternative method to processing blocking and non-blocking statements.
+                    // Currently feels off to me.
+                    
+                    // This is an example of what the node could do if it is blocking.
+                    // Another example is waiting for a mouse click.
+                    Console.WriteLine("Waiting for user input before continuing...");
+                    Console.ReadKey();
+                }
             }
         }
     }
