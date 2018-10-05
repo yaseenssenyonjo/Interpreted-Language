@@ -16,6 +16,6 @@ namespace Interpreted_Language.Language.Parser.Syntax.Nodes.Traits
         /// Executes this node.
         /// </summary>
         /// <param name="context">The execution context this node is executing in.</param>
-        void Execute(IExecutionContext context);
+        BlockingType Execute(IExecutionContext context);
     }
 }

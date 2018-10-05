@@ -15,7 +15,7 @@ namespace Interpreted_Language
 {
     internal static class RenPyProgram
     {
-        public static void Usage()
+        public static void Main()
         {
             var tokens = Tokenise(new RenPyGrammar(), "./Examples/RenPy/Data/script.rpy");
             var syntaxTree = Parse(tokens);

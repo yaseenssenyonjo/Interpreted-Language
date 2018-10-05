@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Interpreted_Language.Language.Interpreter.Traits;
+using Interpreted_Language.Language.Parser.Syntax.Nodes;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 using Interpreted_Language.RenPy.Language.Interpreter;
 
@@ -44,10 +45,11 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             _methodArguments = methodArguments;
         }
 
-        public void Execute(IExecutionContext context)
+        public BlockingType Execute(IExecutionContext context)
         {
             if (!MethodNameToAction.TryGetValue(_methodName, out var action)) throw new Exception($"There was an error on line {LineNumber}. There is no method called '{_methodName}'.");
             action(this, (RenPyExecutionContext)context);
+            return BlockingType.NonBlocking;
         }
         
         private static void CharacterMethod(AssignmentNode node, RenPyExecutionContext context)

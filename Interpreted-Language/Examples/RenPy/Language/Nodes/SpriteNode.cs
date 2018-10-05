@@ -1,5 +1,6 @@
 using System;
 using Interpreted_Language.Language.Interpreter.Traits;
+using Interpreted_Language.Language.Parser.Syntax.Nodes;
 using Interpreted_Language.Language.Parser.Syntax.Nodes.Traits;
 using Interpreted_Language.RenPy.Language.Interpreter;
 
@@ -30,10 +31,11 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             _spriteId = spriteId;
         }
 
-        public void Execute(IExecutionContext context)
+        public BlockingType Execute(IExecutionContext context)
         {
             var character = ((RenPyExecutionContext)context).GetCharacter(_characterName, LineNumber);
             Console.WriteLine($"{character.Id} switches to sprite {_spriteId}");
+            return BlockingType.NonBlocking;
         }
 
     }
