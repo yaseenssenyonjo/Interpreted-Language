@@ -10,8 +10,17 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
     /// </summary>
     internal class ConditionalLoop : IStatement
     {
+        /// <summary>
+        /// The condition.
+        /// </summary>
         private readonly Predicate<TokenList> _condition;
+        /// <summary>
+        /// The function to execute if the condition is true.
+        /// </summary>
         private readonly Action<ConditionalLoop> _function;
+        /// <summary>
+        /// The variables created within the loop.
+        /// </summary>
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
         
         /// <summary>
