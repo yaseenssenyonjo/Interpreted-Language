@@ -14,20 +14,20 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         private readonly TokenType _tokenType;
         /// <summary>
-        /// The expected value of the token.
+        /// The expected value of the token to end the consumption of tokens.
         /// </summary>
         private readonly object _expectedValue;
         /// <summary>
-        /// The name of associate the consumed tokens with.
+        /// The name to associate the consumed tokens with.
         /// </summary>
         private readonly string _name;
         
         /// <summary>
         /// Initialises a new instance of the <see cref="Interpreted_Language.Language.Parser.Groups.Statements.ConsumeUntil"/> class.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="expectedValue"></param>
-        /// <param name="name"></param>
+        /// <param name="type">The type of token to end the consumption of tokens.</param>
+        /// <param name="expectedValue">The expected value of the token to end the consumption of tokens.</param>
+        /// <param name="name">The name to associate the consumed tokens with.</param>
         public ConsumeUntil(TokenType type, object expectedValue, string name)
         {
             _tokenType = type;
