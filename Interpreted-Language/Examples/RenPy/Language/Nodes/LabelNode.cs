@@ -1,4 +1,3 @@
-using System;
 using Interpreted_Language.Language.Interpreter.Traits;
 using Interpreted_Language.Language.Parser.Syntax;
 using Interpreted_Language.Language.Parser.Syntax.Nodes;
@@ -38,7 +37,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             
             // When this method is first called by the interpreter the context will not
             // have this label so the label registers itself thus when this node
-            // is next executed is due to it being called by another node.
+            // is next executed it will be due to it being called by another node.
             
             if (!renPyContext.IsLabelRegistered(_name))
             {
@@ -46,9 +45,8 @@ namespace Interpreted_Language.RenPy.Language.Nodes
                 return BlockingType.NonBlocking;
             }
 
-            var interpreter = new Interpreted_Language.Language.Interpreter.Interpreter(context);
-            interpreter.Execute(_syntaxTree);
-            
+            renPyContext.Interpreter.Push(_syntaxTree);
+
             return BlockingType.NonBlocking;
         }
     }

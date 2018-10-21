@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Interpreted_Language.Language.Interpreter;
@@ -19,6 +20,7 @@ namespace Interpreted_Language
         {
             var tokens = Tokenise(new RenPyGrammar(), "./Examples/RenPy/Data/script.rpy");
             var syntaxTree = Parse(tokens);
+            
             Execute(syntaxTree);
         }
         
@@ -30,7 +32,7 @@ namespace Interpreted_Language
             return tokens;
         }
         
-        private static SyntaxTree Parse(TokenList tokens)
+        private static Parser CreateParser()
         {
             var parser = new Parser();
             
@@ -59,7 +61,7 @@ namespace Interpreted_Language
                 .Add(new ExpectAndIgnore(TokenType.Punctuation, ":"))
                 .Add(new ExpectAndIgnore(TokenType.NewLine))
                 // This conditional loop keeps consuming tokens as long as it begins with a tab.
-                .Add(new ConditionalLoop(t => t.Index < t.Count && t.Next().Type == TokenType.Tab, conditionalLoop =>
+                .Add(new ConditionalLoop(t => t.Index < t.Count && t.Next().Type == TokenType.Tab, (conditionalLoop, tokens) =>
                 {
                     // Gets the existing instance, otherwise creates it if it doesn't exist.
                     var consumedTokens = (TokenList)conditionalLoop.Get("consumedTokens", new TokenList());
@@ -102,7 +104,13 @@ namespace Interpreted_Language
                 .Add(new Capture(TokenType.Identifier, "labelName"))
                 .Add(new ExpectAndIgnore(TokenType.NewLine))
                 .CreateNode(variables => new JumpNode((string)variables["labelName"]));
-            
+
+            return parser;
+        }
+        
+        private static SyntaxTree Parse(TokenList tokens)
+        {
+            var parser = CreateParser();
             var syntaxTree = parser.Parse(tokens);
             return syntaxTree;
         }
@@ -111,7 +119,15 @@ namespace Interpreted_Language
         {
             var executionContext = new RenPyExecutionContext();
             var interpreter = new Interpreter(executionContext);
-            interpreter.Execute(syntaxTree);
+            executionContext.Interpreter = interpreter;
+            
+            interpreter.Push(syntaxTree);
+            
+            while (interpreter.Execute() != InterpreterExecutionState.Completed)
+            {
+                Console.WriteLine("Waiting for user input before continuing...");
+                Console.ReadKey();
+            }
         }
     }
 }

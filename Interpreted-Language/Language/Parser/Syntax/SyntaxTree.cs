@@ -15,11 +15,15 @@ namespace Interpreted_Language.Language.Parser.Syntax
         private readonly List<INode> _nodes = new List<INode>();
         
         /// <summary>
+        /// Gets the number of elements contained in this tree.
+        /// </summary>
+        public int Count => _nodes.Count;
+        /// <summary>
         /// Gets the node at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index of the node to get.</param>
         public INode this[int index] => _nodes[index];
-
+        
         /// <summary>
         /// Adds the specified node to the tree.
         /// </summary>

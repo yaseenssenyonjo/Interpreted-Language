@@ -61,7 +61,8 @@ console.log('...')";
         {
             var executionContext = new JSExecutionContext();
             var interpreter = new Interpreter(executionContext);
-            interpreter.Execute(syntaxTree);
+            interpreter.Push(syntaxTree);
+            interpreter.Execute();
         }
     }
 }

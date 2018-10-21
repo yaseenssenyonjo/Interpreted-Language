@@ -52,8 +52,8 @@ Below are examples illustrating how to accomplish certain tasks.
 ### Interpreter.
     var executionContext = new JSExecutionContext();
     var interpreter = new Interpreter(executionContext);
-    interpreter.Execute(syntaxTree);
-
+    interpreter.Push(syntaxTree);
+    while(interpreter.Execute() != InterpreterExecutionState.Completed) {}
 
 ### Execution Context.
     internal class JSExecutionContext : IExecutionContext

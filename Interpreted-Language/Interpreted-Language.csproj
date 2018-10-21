@@ -45,7 +45,9 @@
     <Compile Include="Examples\JS\Language\Interpreter\JSExecutionContext.cs" />
     <Compile Include="Examples\JS\Language\Nodes\ConsoleNode.cs" />
     <Compile Include="Examples\RenPyProgram.cs" />
+    <Compile Include="Language\Interpreter\HaltedSyntaxTree.cs" />
     <Compile Include="Language\Interpreter\Interpreter.cs" />
+    <Compile Include="Language\Interpreter\InterpreterExecutionState.cs" />
     <Compile Include="Language\Interpreter\Traits\IExecutionContext.cs" />
     <Compile Include="Language\Lexer\Exceptions\CaptureGroupException.cs" />
     <Compile Include="Language\Lexer\Exceptions\LexerException.cs" />
