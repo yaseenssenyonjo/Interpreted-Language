@@ -17,7 +17,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// <summary>
         /// The function to execute if the condition is true.
         /// </summary>
-        private readonly Action<ConditionalLoop> _function;
+        private readonly Action<ConditionalLoop, TokenList> _function;
         /// <summary>
         /// The variables created within the loop.
         /// </summary>
@@ -28,7 +28,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
         /// </summary>
         /// <param name="condition">The condition.</param>
         /// <param name="function">The function to execute if the condition is true.</param>
-        public ConditionalLoop(Predicate<TokenList> condition, Action<ConditionalLoop> function)
+        public ConditionalLoop(Predicate<TokenList> condition, Action<ConditionalLoop, TokenList> function)
         {
             _condition = condition;
             _function = function;
@@ -49,7 +49,7 @@ namespace Interpreted_Language.Language.Parser.Groups.Statements
             // Keep calling the function until the condition is no longer satisfied.
             while (isConditionSatisfied)
             {
-                _function(this);
+                _function(this, tokens);
                 isConditionSatisfied = _condition.Invoke(tokens);
             }
             

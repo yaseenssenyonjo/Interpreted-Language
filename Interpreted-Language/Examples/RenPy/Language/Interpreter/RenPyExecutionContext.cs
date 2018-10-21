@@ -7,6 +7,8 @@ namespace Interpreted_Language.RenPy.Language.Interpreter
 {
     internal class RenPyExecutionContext : IExecutionContext
     {
+        public Interpreted_Language.Language.Interpreter.Interpreter Interpreter;
+        
         private readonly Dictionary<string, LabelNode> _labels = new Dictionary<string, LabelNode>();
         private readonly Dictionary<string, Character> _characters = new Dictionary<string, Character>();
         private readonly Dictionary<string, object> _rooms = new Dictionary<string, object>();

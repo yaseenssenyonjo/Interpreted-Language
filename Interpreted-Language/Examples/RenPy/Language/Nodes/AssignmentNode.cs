@@ -60,7 +60,7 @@ namespace Interpreted_Language.RenPy.Language.Nodes
             var (hasNullVariable, errorMessage) = IsAnyVariableNull(new[] {typeof(string)}, characterId);
             if(hasNullVariable) throw new Exception($"There was an error on line {node.LineNumber}. {errorMessage}");
             
-            Console.WriteLine($"Created an instance for ;{characterId}' using alias {node._variableName}.");
+            Console.WriteLine($"Created an instance for '{characterId}' using alias {node._variableName}.");
 
             if (!context.TryCreateCharacterAlias(node._variableName, characterId)) throw new Exception($"There was an error on {node.LineNumber}. There is already an alias called '{node._variableName}'.");
         }
