@@ -8,9 +8,9 @@
     <ProjectGuid>{6302AD66-FEBA-46E9-A7BE-9F7DF01FACF5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Interpreted_Language</RootNamespace>
-    <AssemblyName>Interpreted_Language</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <RootNamespace>InterpretedLanguage</RootNamespace>
+    <AssemblyName>InterpretedLanguage</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -40,54 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Examples\JSProgram.cs" />
-    <Compile Include="Examples\JS\Language\Grammar\JSGrammar.cs" />
-    <Compile Include="Examples\JS\Language\Interpreter\JSExecutionContext.cs" />
-    <Compile Include="Examples\JS\Language\Nodes\ConsoleNode.cs" />
-    <Compile Include="Examples\RenPyProgram.cs" />
-    <Compile Include="Language\Interpreter\HaltedSyntaxTree.cs" />
-    <Compile Include="Language\Interpreter\Interpreter.cs" />
-    <Compile Include="Language\Interpreter\InterpreterExecutionState.cs" />
-    <Compile Include="Language\Interpreter\Traits\IExecutionContext.cs" />
-    <Compile Include="Language\Lexer\Exceptions\CaptureGroupException.cs" />
-    <Compile Include="Language\Lexer\Exceptions\LexerException.cs" />
-    <Compile Include="Language\Lexer\Grammar\GrammarHelper.cs" />
-    <Compile Include="Language\Lexer\Grammar\Traits\IGrammar.cs" />
-    <Compile Include="Language\Lexer\Lexer.cs" />
-    <Compile Include="Language\Lexer\LexicalRule.cs" />
-    <Compile Include="Language\Lexer\Tokens\Token.cs" />
-    <Compile Include="Language\Lexer\Tokens\TokenList.cs" />
-    <Compile Include="Language\Lexer\Tokens\TokenType.cs" />
-    <Compile Include="Language\Parser\Exceptions\ParserException.cs" />
-    <Compile Include="Language\Parser\Groups\Group.cs" />
-    <Compile Include="Language\Parser\Groups\Statements\Capture.cs" />
-    <Compile Include="Language\Parser\Groups\Statements\ConditionalLoop.cs" />
-    <Compile Include="Language\Parser\Groups\Statements\ConsumeUntil.cs" />
-    <Compile Include="Language\Parser\Groups\Statements\ExpectAndIgnore.cs" />
-    <Compile Include="Language\Parser\Groups\Statements\Traits\IStatement.cs" />
-    <Compile Include="Language\Parser\Parser.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\BlockingType.cs" />
-    <Compile Include="Language\Parser\Syntax\Nodes\Traits\INode.cs" />
-    <Compile Include="Language\Parser\Syntax\SyntaxTree.cs" />
-    <Compile Include="Examples\RenPy\Character.cs" />
-    <Compile Include="Examples\RenPy\Language\Grammar\RenPyGrammar.cs" />
-    <Compile Include="Examples\RenPy\Language\Interpreter\RenPyExecutionContext.cs" />
-    <Compile Include="Examples\RenPy\Language\Nodes\AssignmentNode.cs" />
-    <Compile Include="Examples\RenPy\Language\Nodes\JumpNode.cs" />
-    <Compile Include="Examples\RenPy\Language\Nodes\LabelNode.cs" />
-    <Compile Include="Examples\RenPy\Language\Nodes\SayNode.cs" />
-    <Compile Include="Examples\RenPy\Language\Nodes\SpriteNode.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\README.md">
-      <Link>README.md</Link>
-    </Content>
-    <Content Include="Examples\RenPy\Data\script.rpy">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Examples\RenPy\Language" />
+    <Compile Include="Lexer\Exceptions\LexicalException.cs" />
+    <Compile Include="Lexer\Lexer.cs" />
+    <Compile Include="Lexer\LexicalGrammar.cs" />
+    <Compile Include="Lexer\LexicalLine.cs" />
+    <Compile Include="Lexer\LexicalRule.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Tokens\Token.cs" />
+    <Compile Include="Tokens\TokenType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
