@@ -40,13 +40,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericExtensions.cs" />
+    <Compile Include="Interpreter\Interpreter.cs" />
     <Compile Include="Lexer\Exceptions\LexicalException.cs" />
     <Compile Include="Lexer\Lexer.cs" />
     <Compile Include="Lexer\LexicalGrammar.cs" />
     <Compile Include="Lexer\LexicalLine.cs" />
     <Compile Include="Lexer\LexicalRule.cs" />
+    <Compile Include="Parser\Exceptions\ParserException.cs" />
+    <Compile Include="Parser\Groups\Group.cs" />
+    <Compile Include="Parser\Groups\Statements\Capture.cs" />
+    <Compile Include="Parser\Groups\Statements\ConsumeIfExists.cs" />
+    <Compile Include="Parser\Groups\Statements\ConsumeUntil.cs" />
+    <Compile Include="Parser\Groups\Statements\Evaluate.cs" />
+    <Compile Include="Parser\Groups\Statements\ExpectAndIgnore.cs" />
+    <Compile Include="Parser\Groups\Traits\IGroupPattern.cs" />
+    <Compile Include="Parser\Groups\Traits\IGroupStatement.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\SyntaxTree\AdvancementType.cs" />
+    <Compile Include="Parser\SyntaxTree\SyntaxTree.cs" />
+    <Compile Include="Parser\SyntaxTree\SyntaxTreeState.cs" />
+    <Compile Include="Parser\SyntaxTree\Traits\INode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Tokens\Token.cs" />
+    <Compile Include="Tokens\TokenList.cs" />
     <Compile Include="Tokens\TokenType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
