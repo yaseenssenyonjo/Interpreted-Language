@@ -17,7 +17,7 @@ namespace InterpretedLanguage.Lexer
             return _grammar;
         }
 
-        public List<Token> Tokenise(string input)
+        public TokenList Tokenise(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -36,7 +36,7 @@ namespace InterpretedLanguage.Lexer
             }
         }
 
-        private List<Token> Tokenise(Stream inputStream)
+        private TokenList Tokenise(Stream inputStream)
         {
             if (_grammar == null)
             {
@@ -45,7 +45,7 @@ namespace InterpretedLanguage.Lexer
             
             using (var streamReader = new StreamReader(inputStream))
             {
-                var tokens = new List<Token>();
+                var tokens = new TokenList();
                 var lineNumber = 1;
                 
                 while (!streamReader.EndOfStream)
