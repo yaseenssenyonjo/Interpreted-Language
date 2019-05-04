@@ -7,6 +7,18 @@ namespace InterpretedLanguage.Parser.SyntaxTree
     {
         private readonly List<INode> _nodes = new List<INode>();
         private int _index;
+
+        public SyntaxTreeEnvironment Environment { get; }
+
+        public SyntaxTree()
+        {
+            Environment = null;
+        }
+        
+        public SyntaxTree(SyntaxTreeEnvironment environment)
+        {
+            Environment = environment;
+        }
         
         public void Add(INode node)
         {
