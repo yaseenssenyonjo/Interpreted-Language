@@ -59,6 +59,7 @@
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\SyntaxTree\AdvancementType.cs" />
     <Compile Include="Parser\SyntaxTree\SyntaxTree.cs" />
+    <Compile Include="Parser\SyntaxTree\SyntaxTreeEnvironment.cs" />
     <Compile Include="Parser\SyntaxTree\SyntaxTreeState.cs" />
     <Compile Include="Parser\SyntaxTree\Traits\INode.cs" />
     <Compile Include="Program.cs" />
