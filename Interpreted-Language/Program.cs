@@ -7,7 +7,12 @@ using InterpretedLanguage.Parser.SyntaxTree.Traits;
 using InterpretedLanguage.Tokens;
 
 namespace InterpretedLanguage
-{
+{    
+    internal class MyEnvironment : SyntaxTreeEnvironment
+    {
+        public const string SecretValue = "!";
+    }
+    
     internal class DummyNode : INode
     {
         private readonly string _name;
@@ -19,7 +24,11 @@ namespace InterpretedLanguage
         
         public AdvancementType Execute(SyntaxTree tree)
         {
+            var environment = (MyEnvironment) tree.Environment;
+            
             Console.WriteLine(_name);
+            Console.WriteLine(MyEnvironment.SecretValue);
+            
             return AdvancementType.Continue;
         }
     }
@@ -47,8 +56,12 @@ namespace InterpretedLanguage
                 .Add(new Capture(TokenType.Identifier, "name"))
                 .CreateNode((variables, lineNumber) => new DummyNode((string)variables["name"]));
             
-            var tree = new SyntaxTree();
+            var tree = new SyntaxTree(new MyEnvironment());
             parser.Parse(tree, tokens);
+            
+            var interpreter = new Interpreter.Interpreter();
+            interpreter.PushRoot(tree);
+            while(interpreter.Advance()) {}
         }
     }
 }
