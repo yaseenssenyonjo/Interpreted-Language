@@ -1,13 +1,13 @@
 using System;
 
-namespace InterpretedLanguage.Lexer
+namespace InterpretedLanguage.Language.Lexer
 {
     internal struct LexicalLine
     {
         private readonly string _line;
         private readonly int _number;
         private int _position;
-        
+
         public int Length => _line.Length - _position;
 
         public LexicalLine(string line, int number)
@@ -21,7 +21,7 @@ namespace InterpretedLanguage.Lexer
         {
             return line._line.Substring(line._position);
         }
-        
+
         public static implicit operator int(LexicalLine line)
         {
             return line._number;

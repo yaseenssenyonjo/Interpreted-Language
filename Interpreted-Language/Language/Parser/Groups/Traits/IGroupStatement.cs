@@ -1,6 +1,6 @@
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Language.Tokens;
 
-namespace InterpretedLanguage.Parser.Groups.Traits
+namespace InterpretedLanguage.Language.Parser.Groups.Traits
 {
     internal interface IGroupStatement
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace InterpretedLanguage.Parser.Groups.Traits
+namespace InterpretedLanguage.Language.Parser.Groups.Traits
 {
     internal interface IGroupPattern
     {

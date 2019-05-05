@@ -1,6 +1,6 @@
 using System;
 
-namespace InterpretedLanguage.Lexer.Exceptions
+namespace InterpretedLanguage.Language.Lexer.Exceptions
 {
     internal class LexicalException : Exception
     {
