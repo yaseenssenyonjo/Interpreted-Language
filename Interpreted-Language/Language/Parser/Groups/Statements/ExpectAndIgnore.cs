@@ -1,23 +1,23 @@
-using InterpretedLanguage.Parser.Groups.Traits;
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Language.Parser.Groups.Traits;
+using InterpretedLanguage.Language.Tokens;
 
-namespace InterpretedLanguage.Parser.Groups.Statements
+namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
     internal class ExpectAndIgnore : IGroupStatement
     {
-        private readonly TokenType _type;
+        private readonly int _type;
         private readonly object _value;
-        
-        public ExpectAndIgnore(TokenType type)
+
+        public ExpectAndIgnore(int type)
         {
             _type = type;
         }
 
-        public ExpectAndIgnore(TokenType type, object value) : this(type)
+        public ExpectAndIgnore(int type, object value) : this(type)
         {
             _value = value;
         }
-        
+
         public bool Match(Group group, TokenList tokens)
         {
             var token = tokens.Advance();

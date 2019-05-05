@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using InterpretedLanguage.Parser.Groups.Traits;
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Language.Parser.Groups.Traits;
+using InterpretedLanguage.Language.Tokens;
 
-namespace InterpretedLanguage.Parser.Groups.Statements
+namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
     internal class Evaluate : IGroupStatement
     {
-        private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
         private readonly Action<Dictionary<string, object>, TokenList> _action;
-        
+        private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
+
         public Evaluate(Action<Dictionary<string, object>, TokenList> action)
         {
             _action = action;
@@ -20,7 +20,7 @@ namespace InterpretedLanguage.Parser.Groups.Statements
             _variables.Clear();
             _action.Invoke(_variables, tokens);
             _variables.ForEach(variable => group.AddVariable(variable.Key, variable.Value));
-            
+
             return true;
         }
     }

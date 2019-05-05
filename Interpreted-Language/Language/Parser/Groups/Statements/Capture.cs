@@ -1,19 +1,19 @@
-using InterpretedLanguage.Parser.Groups.Traits;
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Language.Parser.Groups.Traits;
+using InterpretedLanguage.Language.Tokens;
 
-namespace InterpretedLanguage.Parser.Groups.Statements
+namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
     internal class Capture : IGroupStatement
     {
-        private readonly TokenType _type;
         private readonly string _name;
+        private readonly int _type;
 
-        public Capture(TokenType type, string name)
+        public Capture(int type, string name)
         {
             _type = type;
             _name = name;
         }
-        
+
         public bool Match(Group group, TokenList tokens)
         {
             var token = tokens.Advance();

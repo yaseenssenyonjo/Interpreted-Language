@@ -1,4 +1,4 @@
-namespace InterpretedLanguage.Parser.SyntaxTree.Traits
+namespace InterpretedLanguage.Language.Parser.SyntaxTree.Traits
 {
     internal interface INode
     {
