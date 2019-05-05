@@ -1,65 +1,23 @@
-using System;
-using InterpretedLanguage.Lexer;
-using InterpretedLanguage.Parser;
-using InterpretedLanguage.Parser.Groups.Statements;
-using InterpretedLanguage.Parser.SyntaxTree;
-using InterpretedLanguage.Parser.SyntaxTree.Traits;
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Examples.Javascript;
+using InterpretedLanguage.Language.Interpreter;
 
 namespace InterpretedLanguage
 {    
-    internal class MyEnvironment : SyntaxTreeEnvironment
-    {
-        public const string SecretValue = "!";
-    }
-    
-    internal class DummyNode : INode
-    {
-        private readonly string _name;
-        
-        public DummyNode(string name)
-        {
-            _name = name;
-        }
-        
-        public AdvancementType Execute(SyntaxTree tree)
-        {
-            var environment = (MyEnvironment) tree.Environment;
-            
-            Console.WriteLine(_name);
-            Console.WriteLine(MyEnvironment.SecretValue);
-            
-            return AdvancementType.Continue;
-        }
-    }
     
     internal class Program
     {
         public static void Main(string[] args)
         {
-            var lexer = new Lexer.Lexer();
-            lexer.CreateGrammar(string.Empty)
-                .AddRule(TokenType.Identifier, "(.+)");
-            var tokens = lexer.Tokenise("hey");
+            var code = @"
+console.log('This won\'t be visible.');
+console.clear();
+console.log('Hello World!');
+";
             
-            foreach (var token in tokens)
-            {
-                Console.WriteLine(token);
-            }
+            var jsParser = new JavascriptParser();
+            var tree = jsParser.Parse(code);
             
-            var parser = new Parser.Parser();
-            
-            parser.CreateGroup("New Lines")
-                .Add(new ExpectAndIgnore(TokenType.NewLine));
-            
-            parser.CreateGroup(string.Empty)
-                .Add(new Capture(TokenType.Identifier, "name"))
-                .CreateNode((variables, lineNumber) => new DummyNode((string)variables["name"]));
-            
-            var tree = new SyntaxTree(new MyEnvironment());
-            parser.Parse(tree, tokens);
-            
-            var interpreter = new Interpreter.Interpreter();
+            var interpreter = new Interpreter();
             interpreter.PushRoot(tree);
             while(interpreter.Advance()) {}
         }
