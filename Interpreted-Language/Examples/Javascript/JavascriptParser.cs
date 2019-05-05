@@ -8,41 +8,41 @@ using InterpretedLanguage.Language.Tokens;
 
 namespace InterpretedLanguage.Examples.Javascript
 {
-    internal class JavascriptParser
+    internal static class JavascriptParser
     {
-        private readonly Lexer _lexer = new Lexer();
-        private readonly Parser _parser = new Parser();
+        private static readonly Lexer Lexer = new Lexer();
+        private static readonly Parser Parser = new Parser();
 
-        public JavascriptParser()
+        static JavascriptParser()
         {
             ConstructLexer();
             ConstructParser();
         }
 
-        public SyntaxTree Parse(string input)
+        public static SyntaxTree Parse(string input)
         {
             var tree = new SyntaxTree();
-            _parser.Parse(tree, _lexer.Tokenise(input));
+            Parser.Parse(tree, Lexer.Tokenise(input));
             return tree;
         }
 
-        private void ConstructLexer()
+        private static void ConstructLexer()
         {
-            _lexer.CreateGrammar()
+            Lexer.CreateGrammar()
                 .AddRule(JavascriptTokens.Identifier, "^([_A-Za-z][_A-Za-z0-9]*)")
                 .AddRule(JavascriptTokens.String, @"^([""'`])(?:(?=(\\?))\2.)*?\1")
                 .AddRule(JavascriptTokens.Punctuation, "^([.|(|)|;])");
 
-            _lexer.GetRule(JavascriptTokens.String)
+            Lexer.GetRule(JavascriptTokens.String)
                 .ProcessValue(value => value.Substring(1, value.Length - 2));
         }
 
-        private void ConstructParser()
+        private static void ConstructParser()
         {
-            _parser.CreateGroup("New Lines")
+            Parser.CreateGroup("New Lines")
                 .Add(new ExpectAndIgnore(ReservedTokens.NewLine));
 
-            _parser.CreateGroup("Console")
+            Parser.CreateGroup("Console")
                 .Add(new MethodPrefixPattern("console"))
                 .Add(new MethodCallPattern())
                 .Add(new ConsumeIfExists(JavascriptTokens.Punctuation, ";"))

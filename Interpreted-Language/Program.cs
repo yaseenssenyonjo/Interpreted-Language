@@ -14,8 +14,7 @@ console.clear();
 console.log('Hello World!');
 ";
             
-            var jsParser = new JavascriptParser();
-            var tree = jsParser.Parse(code);
+            var tree = JavascriptParser.Parse(code);
             
             var interpreter = new Interpreter();
             interpreter.PushRoot(tree);
