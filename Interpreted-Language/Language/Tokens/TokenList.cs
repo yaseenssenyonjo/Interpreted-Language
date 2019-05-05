@@ -44,9 +44,9 @@ namespace InterpretedLanguage.Language.Tokens
         }
 
         /// <summary>
-        /// Adds the token.
+        /// Adds the specified token.
         /// </summary>
-        /// <param name="token">The token to add.</param>
+        /// <param name="token">The token.</param>
         public void Add(Token token)
         {
             _tokens.Add(token);
