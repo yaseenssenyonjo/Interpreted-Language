@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using InterpretedLanguage.Parser.Groups.Traits;
-using InterpretedLanguage.Parser.SyntaxTree.Traits;
-using InterpretedLanguage.Tokens;
+using InterpretedLanguage.Language.Parser.Groups.Traits;
+using InterpretedLanguage.Language.Parser.SyntaxTree.Traits;
+using InterpretedLanguage.Language.Tokens;
 
-namespace InterpretedLanguage.Parser.Groups
+namespace InterpretedLanguage.Language.Parser.Groups
 {
     internal class Group
     {
         private readonly List<IGroupStatement> _statements = new List<IGroupStatement>();
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();
-        
+
         private Func<Dictionary<string, object>, int, INode> _createNodeFunc;
-        
+
         public Group Add(IGroupStatement statement)
         {
             _statements.Add(statement);
@@ -24,19 +24,21 @@ namespace InterpretedLanguage.Parser.Groups
             pattern.CreateStatements().ForEach(_statements.Add);
             return this;
         }
-        
+
         public void AddVariable(string name, object value)
         {
             _variables.Add(name, value);
         }
-        
+
         public void CreateNode(Func<Dictionary<string, object>, int, INode> createNodeFunc)
         {
             _createNodeFunc = createNodeFunc;
         }
-        
+
         public bool Matches(SyntaxTree.SyntaxTree tree, TokenList tokens)
         {
+            _variables.Clear();
+
             foreach (var statement in _statements)
             {
                 if (statement.Match(this, tokens)) continue;
