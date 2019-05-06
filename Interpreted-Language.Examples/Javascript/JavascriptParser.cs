@@ -23,7 +23,7 @@ namespace InterpretedLanguage.Examples.Javascript
         public static SyntaxTree Parse(string input)
         {
             var tree = new SyntaxTree();
-            Parser.Parse(tree, Lexer.Tokenise(input));
+            Parser.Parse(tree, Lexer.Tokenise(input, typeof(JavascriptTokens)));
             return tree;
         }
 

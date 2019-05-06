@@ -6,7 +6,7 @@ namespace InterpretedLanguage.Examples.Javascript.Patterns
 {
     internal class MethodCallPattern : IGroupPattern
     {
-        public List<IGroupStatement> CreateStatements()
+        public List<IGroupStatement> GetStatements()
         {
             return new List<IGroupStatement>
             {
