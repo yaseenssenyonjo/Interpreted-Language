@@ -1,5 +1,4 @@
 using InterpretedLanguage.Examples.Javascript;
-using InterpretedLanguage.Language.Interpreter;
 
 namespace InterpretedLanguage.Examples
 {    
@@ -7,17 +6,12 @@ namespace InterpretedLanguage.Examples
     {
         public static void Main(string[] args)
         {
-            var code = @"
-console.log('This won\'t be visible.');
-console.clear();
-console.log('Hello World!');
-";
+            /*
+             * Uncomment one of the lines below to demo
+             * the example.
+             */
             
-            var tree = JavascriptParser.Parse(code);
-            
-            var interpreter = new Interpreter();
-            interpreter.PushRoot(tree);
-            while(interpreter.Advance()) {}
+            // JavascriptProgram.Run();
         }
     }
 }

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Javascript\JavascriptParser.cs" />
+    <Compile Include="Javascript\JavascriptProgram.cs" />
     <Compile Include="Javascript\JavascriptTokens.cs" />
     <Compile Include="Javascript\Nodes\ConsoleNode.cs" />
     <Compile Include="Javascript\Patterns\MethodCallPattern.cs" />
