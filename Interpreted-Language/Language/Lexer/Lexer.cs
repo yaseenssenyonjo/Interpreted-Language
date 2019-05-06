@@ -126,7 +126,7 @@ namespace InterpretedLanguage.Language.Lexer
                 var reservedConflicts = reservedTokens.FirstOrDefault(r => r.Value.Equals(token.Value));
 
                 // Check if the token value conflicts with the value of other tokens.
-                var internalConflicts = userTokens.FirstOrDefault(f => f.Value.Equals(token.Value));
+                var internalConflicts = userTokens.FirstOrDefault(f => !f.Key.Equals(token.Key) && f.Value.Equals(token.Value));
                 
                 if (!reservedConflicts.Equals(defaultKvp))
                 {
