@@ -6,16 +6,32 @@ using InterpretedLanguage.Language.Tokens;
 
 namespace InterpretedLanguage.Language.Lexer
 {
+    /// <summary>
+    /// Represents a lexer.
+    /// </summary>
     internal class Lexer
     {
+        /// <summary>
+        /// The grammar.
+        /// </summary>
         private LexicalGrammar _grammar;
 
+        /// <summary>
+        /// Creates the grammar.
+        /// </summary>
+        /// <returns>The lexical grammar.</returns>
         public LexicalGrammar CreateGrammar()
         {
             _grammar = new LexicalGrammar();
             return _grammar;
         }
-
+        
+        /// <summary>
+        /// Tokenise the input.
+        /// </summary>
+        /// <param name="input">The input to tokenise.</param>
+        /// <returns>The tokens.</returns>
+        /// <exception cref="ArgumentNullException">The input is null.</exception>
         public TokenList Tokenise(string input)
         {
             if (string.IsNullOrEmpty(input)) throw new ArgumentNullException(nameof(input));
@@ -31,7 +47,13 @@ namespace InterpretedLanguage.Language.Lexer
                 return Tokenise(memoryStream);
             }
         }
-
+        
+        /// <summary>
+        /// Tokenise the stream of input.
+        /// </summary>
+        /// <param name="inputStream">The stream of input.</param>
+        /// <returns>The tokens.</returns>
+        /// <exception cref="LexicalException">There are no grammar rules.</exception>
         private TokenList Tokenise(Stream inputStream)
         {
             if (_grammar == null) throw new LexicalException("There are no grammar rules created for the lexer.");
@@ -57,7 +79,9 @@ namespace InterpretedLanguage.Language.Lexer
                         }
 
                         if (token == null)
+                        {
                             throw new LexicalException($"There are no rules that match line {lineNumber}.");
+                        }   
                     }
 
                     tokens.Add(new Token(ReservedTokens.NewLine, string.Empty, lineNumber++));
@@ -66,7 +90,12 @@ namespace InterpretedLanguage.Language.Lexer
                 return tokens;
             }
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public LexicalRule GetRule(int type)
         {
             return _grammar.GetRule(type);
