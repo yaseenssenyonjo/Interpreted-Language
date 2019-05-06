@@ -6,7 +6,7 @@ namespace InterpretedLanguage.Language.Parser.SyntaxTree
     /// <summary>
     /// Represents a syntax tree.
     /// </summary>
-    internal class SyntaxTree
+    public class SyntaxTree
     {
         /// <summary>
         /// The nodes.

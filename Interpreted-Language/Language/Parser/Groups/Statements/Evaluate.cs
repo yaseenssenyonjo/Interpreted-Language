@@ -5,7 +5,7 @@ using InterpretedLanguage.Language.Tokens;
 
 namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
-    internal class Evaluate : IGroupStatement
+    public class Evaluate : IGroupStatement
     {
         private readonly Action<Dictionary<string, object>, TokenList> _action;
         private readonly Dictionary<string, object> _variables = new Dictionary<string, object>();

@@ -7,7 +7,7 @@ namespace InterpretedLanguage.Language.Interpreter
     /// <summary>
     /// Represents an interpreter.
     /// </summary>
-    internal class Interpreter
+    public class Interpreter
     {
         /// <summary>
         /// The execution stack.

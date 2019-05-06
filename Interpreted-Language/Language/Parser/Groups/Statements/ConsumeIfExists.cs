@@ -3,7 +3,7 @@ using InterpretedLanguage.Language.Tokens;
 
 namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
-    internal class ConsumeIfExists : IGroupStatement
+    public class ConsumeIfExists : IGroupStatement
     {
         private readonly int _type;
         private readonly object _value;

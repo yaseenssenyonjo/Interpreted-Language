@@ -3,7 +3,7 @@ namespace InterpretedLanguage.Language.Tokens
     /// <summary>
     /// Represents a token.
     /// </summary>
-    internal class Token
+    public class Token
     {
         /// <summary>
         /// The type of token.

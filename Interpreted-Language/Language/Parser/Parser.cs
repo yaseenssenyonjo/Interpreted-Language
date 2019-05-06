@@ -8,7 +8,7 @@ namespace InterpretedLanguage.Language.Parser
     /// <summary>
     /// Represents a parser.
     /// </summary>
-    internal class Parser
+    public class Parser
     {
         /// <summary>
         /// The groups.
