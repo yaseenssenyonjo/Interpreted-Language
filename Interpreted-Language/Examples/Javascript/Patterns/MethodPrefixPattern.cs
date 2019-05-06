@@ -13,7 +13,7 @@ namespace InterpretedLanguage.Examples.Javascript.Patterns
             _prefix = prefix;
         }
 
-        public List<IGroupStatement> CreateStatements()
+        public List<IGroupStatement> GetStatements()
         {
             return new List<IGroupStatement>
             {
