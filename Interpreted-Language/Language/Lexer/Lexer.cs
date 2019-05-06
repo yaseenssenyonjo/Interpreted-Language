@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using InterpretedLanguage.Language.Lexer.Exceptions;
 using InterpretedLanguage.Language.Tokens;
@@ -30,12 +32,17 @@ namespace InterpretedLanguage.Language.Lexer
         /// Tokenise the input.
         /// </summary>
         /// <param name="input">The input to tokenise.</param>
+        /// <param name="type">The class type of tokens.</param>
         /// <returns>The tokens.</returns>
         /// <exception cref="ArgumentNullException">The input is null.</exception>
-        public TokenList Tokenise(string input)
+        /// <exception cref="ArgumentNullException">The type is null.</exception>
+        public TokenList Tokenise(string input, Type type)
         {
             if (string.IsNullOrEmpty(input)) throw new ArgumentNullException(nameof(input));
+            if (type == null) throw new ArgumentNullException(nameof(type));
 
+            ValidateTokens(type);
+            
             using (var memoryStream = new MemoryStream())
             {
                 var inputBytes = Encoding.UTF8.GetBytes(input);
@@ -99,6 +106,38 @@ namespace InterpretedLanguage.Language.Lexer
         public LexicalRule GetRule(int type)
         {
             return _grammar.GetRule(type);
+        }
+        
+        /// <summary>
+        /// Validates the tokens.
+        /// </summary>
+        /// <param name="type">The class type of tokens.</param>
+        /// <exception cref="TokenConflictException">Two or more tokens share the same integer value.</exception>
+        private static void ValidateTokens(Type type)
+        {
+            var reservedTokens = typeof(ReservedTokens).GetFields().ToDictionary(f => f.Name, f => f.GetValue(null));
+            var userTokens = type.GetFields().ToDictionary(f => f.Name, f => f.GetValue(null));
+            
+            var defaultKvp = default(KeyValuePair<string, object>);
+            
+            foreach (var token in userTokens)
+            {
+                // Check if the token value conflicts with the value of any reserved token.
+                var reservedConflicts = reservedTokens.FirstOrDefault(r => r.Value.Equals(token.Value));
+
+                // Check if the token value conflicts with the value of other tokens.
+                var internalConflicts = userTokens.FirstOrDefault(f => f.Value.Equals(token.Value));
+                
+                if (!reservedConflicts.Equals(defaultKvp))
+                {
+                    throw new TokenConflictException($"The '{token.Key}' token is attempting to use a reserved token value.");
+                }
+                
+                if (!internalConflicts.Equals(defaultKvp))
+                {
+                    throw new TokenConflictException($"The '{token.Key}' token is attempting to use a value already in use by another token.");
+                }
+            }
         }
     }
 }
