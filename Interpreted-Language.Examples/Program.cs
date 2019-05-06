@@ -1,9 +1,8 @@
 using InterpretedLanguage.Examples.Javascript;
 using InterpretedLanguage.Language.Interpreter;
 
-namespace InterpretedLanguage
+namespace InterpretedLanguage.Examples
 {    
-    
     internal class Program
     {
         public static void Main(string[] args)
