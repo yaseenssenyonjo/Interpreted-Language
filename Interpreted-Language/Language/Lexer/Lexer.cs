@@ -99,10 +99,10 @@ namespace InterpretedLanguage.Language.Lexer
         }
         
         /// <summary>
-        /// 
+        /// Gets the rule associated with the specified type.
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
+        /// <param name="type">The type of token.</param>
+        /// <returns>The lexical rule.</returns>
         public LexicalRule GetRule(int type)
         {
             return _grammar.GetRule(type);

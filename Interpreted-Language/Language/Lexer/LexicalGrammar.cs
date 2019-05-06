@@ -29,7 +29,7 @@ namespace InterpretedLanguage.Language.Lexer
         /// Gets the rule associated with the specified type.
         /// </summary>
         /// <param name="type">The type of token.</param>
-        /// <returns></returns>
+        /// <returns>The lexical rule.</returns>
         public LexicalRule GetRule(int type)
         {
             return _rules[type];

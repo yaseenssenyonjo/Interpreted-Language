@@ -78,7 +78,7 @@ namespace InterpretedLanguage.Language.Lexer
         }
         
         /// <summary>
-        /// Sets the pre-processor value function.
+        /// Sets the value pre-processor function.
         /// </summary>
         /// <param name="func">The function.</param>
         public void ProcessValue(Func<string, object> func)
