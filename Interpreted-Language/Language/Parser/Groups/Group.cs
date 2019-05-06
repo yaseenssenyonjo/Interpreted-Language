@@ -9,7 +9,7 @@ namespace InterpretedLanguage.Language.Parser.Groups
     /// <summary>
     /// Represents a group.
     /// </summary>
-    internal class Group
+    public class Group
     {
         /// <summary>
         /// The statements.

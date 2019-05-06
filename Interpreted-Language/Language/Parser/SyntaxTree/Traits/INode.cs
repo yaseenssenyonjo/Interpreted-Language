@@ -3,7 +3,7 @@ namespace InterpretedLanguage.Language.Parser.SyntaxTree.Traits
     /// <summary>
     /// Provides the contract for nodes to implement.
     /// </summary>
-    internal interface INode
+    public interface INode
     {
         /// <summary>
         /// Executes the node.

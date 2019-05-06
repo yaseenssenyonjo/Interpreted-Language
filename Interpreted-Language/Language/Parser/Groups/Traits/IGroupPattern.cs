@@ -5,7 +5,7 @@ namespace InterpretedLanguage.Language.Parser.Groups.Traits
     /// <summary>
     /// Represents statements in a certain order.
     /// </summary>
-    internal interface IGroupPattern
+    public interface IGroupPattern
     {
         /// <summary>
         /// Gets a list of statements.

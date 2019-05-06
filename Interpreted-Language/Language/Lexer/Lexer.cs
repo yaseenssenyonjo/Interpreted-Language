@@ -11,7 +11,7 @@ namespace InterpretedLanguage.Language.Lexer
     /// <summary>
     /// Represents a lexer.
     /// </summary>
-    internal class Lexer
+    public class Lexer
     {
         /// <summary>
         /// The grammar.

@@ -5,7 +5,7 @@ namespace InterpretedLanguage.Language.Parser.Groups.Traits
     /// <summary>
     /// Represents a statement.
     /// </summary>
-    internal interface IGroupStatement
+    public interface IGroupStatement
     {
         /// <summary>
         /// Matches the specified tokens.

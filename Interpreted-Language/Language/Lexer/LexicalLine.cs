@@ -5,7 +5,7 @@ namespace InterpretedLanguage.Language.Lexer
     /// <summary>
     /// Represents a line being scanned by the lexer.
     /// </summary>
-    internal struct LexicalLine
+    public struct LexicalLine
     {
         /// <summary>
         /// The line.

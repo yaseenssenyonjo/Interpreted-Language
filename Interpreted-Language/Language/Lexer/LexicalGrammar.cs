@@ -6,7 +6,7 @@ namespace InterpretedLanguage.Language.Lexer
     /// <summary>
     /// Represents the grammar for the lexer.
     /// </summary>
-    internal class LexicalGrammar : IEnumerable<LexicalRule>
+    public class LexicalGrammar : IEnumerable<LexicalRule>
     {
         /// <summary>
         /// The lexical rules.

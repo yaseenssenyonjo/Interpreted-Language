@@ -8,7 +8,7 @@ namespace InterpretedLanguage.Language.Lexer
     /// <summary>
     /// Represents a lexical rule.
     /// </summary>
-    internal class LexicalRule
+    public class LexicalRule
     {
         /// <summary>
         /// The type of token.

@@ -6,7 +6,7 @@ namespace InterpretedLanguage.Language.Tokens
     /// <summary>
     /// Represents a list of tokens.
     /// </summary>
-    internal class TokenList : IEnumerable<Token>
+    public class TokenList : IEnumerable<Token>
     {
         /// <summary>
         /// The underlying list of tokens.

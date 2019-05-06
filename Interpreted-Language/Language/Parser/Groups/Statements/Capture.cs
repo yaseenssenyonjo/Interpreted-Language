@@ -3,7 +3,7 @@ using InterpretedLanguage.Language.Tokens;
 
 namespace InterpretedLanguage.Language.Parser.Groups.Statements
 {
-    internal class Capture : IGroupStatement
+    public class Capture : IGroupStatement
     {
         private readonly string _name;
         private readonly int _type;
